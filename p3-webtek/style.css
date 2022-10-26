@@ -1,0 +1,87 @@
+html, body{
+    margin: 0;
+    background-color: #1b273d;
+    width: 100%;
+}
+.til-høyre img{ 
+    width: 100px;
+    height: 100px;
+}
+footer img{
+    width: 50px;
+    height: 50px;
+}
+
+header{
+    align-items: center;
+    background-color: #a586b0;
+    height: 70px;
+    align-items: center;
+    display: flex;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    
+}
+
+
+
+header a, .navbar a{
+    font-family: Helvetica, Arial, Verdana;
+    font-size: 18px;
+    text-decoration: none;
+    color: white;
+}
+
+.til-høyre{
+    display: flex;
+    width: 22%;
+    align-items: center;
+    justify-content: space-around;
+    margin-left: auto;
+    margin-right: 0;
+    }
+.til-venstre{
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-right: auto;
+    margin-left: 0;
+}
+
+footer {
+    height: 70px;
+    align-items: center;
+    display: flex;
+    background-color: #283754;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    
+}
+
+footer a, .footer-linker a{
+    font-family: Helvetica, Arial, Verdana;
+    font-size: 18px;
+    text-decoration: none;
+    color: white;
+}
+
+.footer-til-høyre{
+    display: flex;
+    width: 22%;
+    align-items: center;
+    justify-content: space-around;
+    margin-left: auto;
+    margin-right: 0;
+}
+
+
+.footer-til-venstre{
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    
+}
