@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artister</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="artister.css">
+    <link rel="stylesheet" href="slideshowOriginal.css">
+    <style>
+    </style>
+    <link rel="icon" href="logo/syngfonia_favicon.png" type="image/x-icon"> 
+</head>
+<body>
+    <main>
+        <div id="navnMain">
+            <div id="aLogo">
+                <img id="imgLogo" src="photos/artist-tittel.png" alt="logo">
+            </div>
+            <div id="navnDiv">
+                <div id="storeNavn">
+                    <p onclick = "show(l[0])" class="pBtn">Gotland</p>
+                    <p onclick = "show(l[1])" class="pBtn">Carthage</p>
+                </div>
+                <div id="linje"></div>
+                <div id="smaaNavn">
+                    <p onclick = "show(l[2])" class="pBtn">Republic of Senegal</p>
+                    <p onclick = "show(l[3])" class="pBtn">Democratic People's Reublic of Korea</p>
+                    <p onclick = "show(l[4])" class="pBtn">Czech Republic</p>
+                    <p onclick = "show(l[5])" class="pBtn">French Republic</p>
+                    <p onclick = "show(l[6])" class="pBtn">Central African Republic</p>
+                </div>
+            </div>
+        </div>
+        <div id="slideContainer">
+            <a id="leftBtn" class="slideBtn" onclick="turnLeft()">&#10094;</a>
+            <div id="mainSlide">
+                <div id="fadeElement"></div>
+                <div id="prog"></div>
+            </div>
+            <a id="rightBtn" class="slideBtn" onclick="turnRight()">&#10095;</a>
+        </div>
+       
+    </main>
+    <script src="universalis.js"></script>
+    <script>
+        div = "prog"; w="95%"; h="auto";
+        l = [{photo: "photos/artister/artist1.png",  title: "Gotland", body:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum euismod eleifend metus, eu pellentesque ante scelerisque venenatis. Ut nec mauris cursus, sagittis lacus at, mattis enim."}, {photo: "photos/artister/artist2.png",  title: "Carthage", body:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum euismod eleifend metus, eu pellentesque ante scelerisque venenatis. Ut nec mauris cursus, sagittis lacus at, mattis enim. Aliquam consectetur purus quis nunc semper tincidunt. Suspendisse eget nisl sem. Vivamus egestas nisi nec mauris molestie, nec consequat dui iaculis."}, {photo: "photos/artister/artist3.png",  title: "Republic of Senegal", body:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum euismod eleifend metus, eu pellentesque ante scelerisque venenatis. Ut nec mauris cursus, sagittis lacus at, mattis enim. Aliquam consectetur purus quis nunc semper tincidunt. Suspendisse eget nisl sem. Vivamus egestas nisi nec mauris molestie, nec consequat dui iaculis."}, {photo: "photos/artister/artist4.png",  title: "Democratic People's Reublic of Korea", body:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum euismod eleifend metus, eu pellentesque ante scelerisque venenatis. Ut nec mauris cursus, sagittis lacus at, mattis enim. Aliquam consectetur purus quis nunc semper tincidunt. Suspendisse eget nisl sem. Vivamus egestas nisi nec mauris molestie, nec consequat dui iaculis."}, {photo: "photos/artister/artist5.png",  title: "Czech Republic", body:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum euismod eleifend metus, eu pellentesque ante scelerisque venenatis. Ut nec mauris cursus, sagittis lacus at, mattis enim. Aliquam consectetur purus quis nunc semper tincidunt. Suspendisse eget nisl sem. Vivamus egestas nisi nec mauris molestie, nec consequat dui iaculis."}, {photo: "photos/artister/artist6.png",  title: "French Republic", body:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum euismod eleifend metus, eu pellentesque ante scelerisque venenatis. Ut nec mauris cursus, sagittis lacus at, mattis enim. Aliquam consectetur purus quis nunc semper tincidunt. Suspendisse eget nisl sem. Vivamus egestas nisi nec mauris molestie, nec consequat dui iaculis."}, {photo: "photos/artister/artist7.png",  title: "Central African Republic", body:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum euismod eleifend metus, eu pellentesque ante scelerisque venenatis. Ut nec mauris cursus, sagittis lacus at, mattis enim. Aliquam consectetur purus quis nunc semper tincidunt. Suspendisse eget nisl sem. Vivamus egestas nisi nec mauris molestie, nec consequat dui iaculis."}]
+    </script>
+    <script src="slideshowOriginal.js"></script>
+    <script>slideShow(); setInterval(turnRight, 10000)</script>
+      
+</body>
+</html>
+
