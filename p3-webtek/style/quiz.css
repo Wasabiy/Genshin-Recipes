@@ -86,13 +86,13 @@ p:hover{
 }
 
 .play{
-    background-image: url(quiz-bilder/pause.png) ;
+    background-image: url('images/pause.png') ;
     border-radius: 40px;
 
 }
 
 .paused{
-    background-image: url(quiz-bilder/play.png) ;
+    background-image: url('images/play.png') ;
     border-radius: 40px;
 }
 
