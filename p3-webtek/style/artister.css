@@ -67,7 +67,7 @@ main {
 #mainSlide {
     height: 470px;
     width: 590px;
-    background-color: whitesmoke;
+    background-color: bisque;
     margin-top: 30px;
     border-radius: 10px;
     position: relative;
@@ -80,7 +80,7 @@ main {
     padding: 12px;
     padding-left: 15px;
     font-family: Helvetica, Arial, sans-serif;
-    color:gray;
+    color: black;
 }
 
 #prog > img {
@@ -92,7 +92,7 @@ main {
 #fadeElement {
     height: 470px;
     width: 100%;
-    background-color: whitesmoke;
+    background-color: bisque;
     border-radius: 10px;
 }
 
@@ -145,4 +145,10 @@ main {
     margin-right: 15px;
     margin-left: 15px;
     border-radius: 3px;
+}
+
+@media only screen and (max-width: 600px) {
+    #smaaNavn {
+        font-size: 18px;
+    }
 }
