@@ -93,18 +93,57 @@
                 console.log("test");
             } else {
                 let antallFam = document.getElementById("antallFam").value;
-            
-                    let epostFam = document.getElementById("epostFam").value;
-                    let tlfFam = document.getElementById("tlfFam").value;
-                    let dateFam = document.getElementById("dato1").value;
+                let epostFam = document.getElementById("epostFam").value;
+                let tlfFam = document.getElementById("tlfFam").value;
+                let dateFam = document.getElementById("dato1").value;
 
                 let sum = antallFam * pris * 0.75;
                 innerBody.innerHTML = "";
                 console.log(antallFam);
                 innerBody.innerHTML = "Da har du kjøpt billettene til familien din! De er registrert under bestillers epost og telefonnummner. Dette er billettene dine, ta gjerne et bilde <br>"
-                innerBody.innerHTML = "Antallet billetter: " + antallFam  + "<br>" + "Din epost: " + epostFam + "<br>" + "Ditt telefonnummer: " + tlfFam + "<br> Valgt dato: " + dateFam  + "<br> Totalpris: " + sum;
+                innerBody.innerHTML = "Antallet billetter: " + antallFam + "<br>" + "Din epost: " + epostFam + "<br>" + "Ditt telefonnummer: " + tlfFam + "<br> Valgt dato: " + dateFam + "<br> Totalpris: " + sum;
 
-}
+            }
+        });
+
+        
+        registrerVenn.addEventListener("click", function writeOutAleneInputFam() {
+            if (document.getElementById("antallVenn").value == "" || document.getElementById("epostVenn").value == "" || document.getElementById("tlfVenn").value == "" || document.getElementById("dato2").value == "") {
+                console.log(document.getElementById("antallFam").value);
+                alert("Skriv inn i inputen");
+                console.log("test");
+            } else {
+                let antallVenn = document.getElementById("antallVenn").value;
+                let epostVenn = document.getElementById("epostVenn").value;
+                let tlfVenn = document.getElementById("tlfVenn").value;
+                let datoVenn = document.getElementById("dato2").value;
+
+                let sum = antallVenn * pris * 0.75;
+                innerBody.innerHTML = "";
+                innerBody.innerHTML = "Da har du kjøpt billettene til vennegjengen din! De er registrert under bestillers epost og telefonnummner. Dette er billettene dine, ta gjerne et bilde <br>";
+                innerBody.innerHTML = "Antallet billetter: " + antallVenn + "<br>" + "Din epost: " + epostVenn + "<br>" + "Ditt telefonnummer: " + tlfVenn + "<br> Valgt dato: " + datoVenn + "<br> Totalpris: " + sum;
+            }
+        });
+
+        
+        registrerKnapp.addEventListener("click", function writeOutAleneInputFam() {
+            if (document.getElementById("navn").value == "" || document.getElementById("alder").value == "" || document.getElementById("epost").value == "" || document.getElementById("tlf").value == "" || document.getElementById("dato3").value == "") {
+                console.log(document.getElementById("antallFam").value);
+                alert("Skriv inn i inputen");
+                console.log("test");
+            } else {
+                let aleneNavn = document.getElementById("navn").value;
+                let aleneAlder = document.getElementById("alder").value;
+                let aleneEpost = document.getElementById("epost").value;
+                let aleneTlf = document.getElementById("tlf").value;
+                let datoTlf = document.getElementById("dato3").value;
+
+                let sum = antallFam * pris * 0.75;
+                innerBody.innerHTML = "";
+                    innerBody.innerHTML = "Da har du kjøpt billettene! Dette er billettene dine, ta gjerne et bilde <br>";
+                    innerBody.innerHTML = "Navn: " + aleneNavn + "<br>" + "alder: " + aleneAlder + "<br>" + "epost: " + aleneEpost + "<br>" + "Telefonnummer: " + aleneTlf + "<br>" + "Valgt dato: " + datoTlf + "<br> Totalpris: " + pris;
+
+            }
         });
 
         document.addEventListener("change", function onChange() {
@@ -116,32 +155,12 @@
 
             if (document.getElementById("gruppeVenner").checked) {
                 vennerDiv.style.display = "block";
-                let antallVenn = document.getElementById("antallVenn").value;
-                let epostVenn = document.getElementById("epostVenn").value;
-                let tlfVenn = document.getElementById("tlfVenn").value;
-                let datoVenn = document.getElementById("dato2").value;
-                registrerVenn.addEventListener("click", function writeOutAleneInputVenn() {
-                    let sum = antallVenn * pris * 0.10;
-                    innerBody.innerHTML = "";
-                    innerBody.innerHTML = "Da har du kjøpt billettene til vennene dine! De er registrert under din epost og telefonnummner. Dette er billettene dine, ta gjerne et bilde <br>"
-                    innerBody.innerHTML = "Antallet billetter: " + antallVenn + "<br>" + "Din epost: " + epostVenn + "<br>" + "Ditt telefonnummer: " + tlfVenn + "<br> Valgt dato: " + datoVenn + "<br> Totalpris: " + sum;
-                });
             } else {
                 vennerDiv.style.display = "none";
             }
 
             if (document.getElementById("alene").checked) {
                 alenediv.style.display = "block";
-                let aleneNavn = document.getElementById("navn").value;
-                let aleneAlder = document.getElementById("alder").value;
-                let aleneEpost = document.getElementById("epost").value;
-                let aleneTlf = document.getElementById("tlf").value;
-                let datoTlf = document.getElementById("dato3").value;
-                registrerKnapp.addEventListener("click", function writeOutAleneInput() {
-                    innerBody.innerHTML = "";
-                    innerBody.innerHTML = "Da har du kjøpt billettene! Dette er billettene dine, ta gjerne et bilde <br>"
-                    innerBody.innerHTML = "Navn: " + aleneNavn + "<br>" + "alder: " + aleneAlder + "<br>" + "epost: " + aleneEpost + "<br>" + "Telefonnummer: " + aleneTlf + "<br>" + "Valgt dato: " + datoTlf + "<br> Totalpris: " + pris;
-                });
             } else {
                 alenediv.style.display = "none";
             }
