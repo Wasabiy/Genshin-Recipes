@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Om oss</title>
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/om_oss.css">
+    <link rel="stylesheet" href="style/slideshowOriginal.css">
+    <link rel="icon" href="images/logo/syngfonia_favicon.png" type="image/x-icon"> 
+</head>
+<body>
+    <main>
+        <div id="om_oss_main"> 
+            <div id="om_oss_content">
+                <div id="om_oss_tittel">
+                    <img id = "om_oss_tittelbilde" src="images/logo/om_oss_syngfonia.png" alt="Om oss">
+                </div>
+                <div id="om_oss_inner_body">
+                    <h2>Hva er Syngfonia?</h2>
+                    <p>Vi i Syngfonia synes opera er skikkelig kult, og etter en tur på festivalen vår tror vi du vil tenke det samme!
+                        Ved å arrangere en festival som Syngfonia ønsker vi å gjøre opera tilgjengelig for folket, og vise at opera kan
+                        være både hipt og fresht. Vi har fått tak i artister som er i verdenseliten i det å kombinere tradisjonell
+                        opera med mer moderne kunstformer; til oss kommer store navn som Gotland, Carthage og French Republic!
+                        Dette blir en opplevelse uten like, kjøp billetter da vel!!!
+                    </p>
+                </div>
+            </div>
+            <div id="mainSlide">
+                <div id="fadeElement"></div>
+                <div id="prog"></div>
+            </div>
+        </div>
+
+    </main>
+    <script src="script/universalis.js"></script>
+    <script>
+        div = "prog"; w="95%"; h="auto";
+        l = [{photo: "images/om_oss/trondheim_spektrum.jpg", title: "Trondheim Spektrum", body: ""}, {photo: "images/om_oss/festivaldeltagere.jpg", title: "Festivaldeltager", body: ""}, {photo: "images/om_oss/oss.jpg", title: "Oss", body: ""}]
+    </script>
+    <script src="script/slideshowOriginal.js"></script>
+    <script>slideShow()
+        document.addEventListener('scroll', (event) => {
+                turnRight();            
+        });
+    </script>
+</body>
+</html>
+
