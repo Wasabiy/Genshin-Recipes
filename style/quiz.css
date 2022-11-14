@@ -85,16 +85,16 @@ p:hover{
     width: 35%;
 }
 
-/*.play{
-    background-image: url('images/pause.png');
+.play{
+    background-image: url('../images/pause.png');
     border-radius: 40px;
 
 }
 
 .paused{
-    background-image: url('images/play.png');
+    background-image: url('../images/play.png');
     border-radius: 40px;
-}*/
+}
 
 #audio-btn{
     width: 180px;
