@@ -30,6 +30,10 @@
                 <div id="fadeElement"></div>
                 <div id="prog"></div>
             </div>
+            <div id="btns">
+                <a id="leftBtn" class="slideBtn" onclick="turnLeft()">&#10094;</a>
+                <a id="rightBtn" class="slideBtn" onclick="turnRight()">&#10095;</a>
+            </div>
         </div>
 
     </main>
@@ -39,11 +43,7 @@
         l = [{photo: "images/om_oss/trondheim_spektrum.jpg", title: "Trondheim Spektrum", body: ""}, {photo: "images/om_oss/festivaldeltagere.jpg", title: "Festivaldeltager", body: ""}, {photo: "images/om_oss/oss.jpg", title: "Oss", body: ""}]
     </script>
     <script src="script/slideshowOriginal.js"></script>
-    <script>slideShow()
-        document.addEventListener('scroll', (event) => {
-                turnRight();            
-        });
-    </script>
+    <script>slideShow()</script>
 </body>
 </html>
 
