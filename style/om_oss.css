@@ -33,6 +33,8 @@ body{
 }
 
 #prog {
+    height: inherit;
+    width: inherit;
     display: flex;
     flex-direction: column;
     padding: 12px;
@@ -42,19 +44,38 @@ body{
 }
 
 #mainSlide {
-    height: 470px;
-    width: 590px;
+    height: 540px;
+    width: 630px;
     background-color: inherit;
     margin-top: 50px;
     margin: 120px;
     border-radius: 10px;
     position: relative;
     box-shadow: 0 0 20px 20px #1c2333;
+    align-self: center;
+    justify-self: center;
 }
 
 #fadeElement {
-    height: 470px;
-    width: 100%;
+    height: inherit;
+    width: inherit;
     background-color: inherit;
     border-radius: 10px;
+    opacity: 0;
+    z-index: 10;
+}
+
+.slideBtn {
+    border-radius: 5px;
+    font-size: 50px;
+    color: aliceblue;
+    margin: 10px;
+    z-index: 10;
+}
+
+img {
+    align-self: center;
+    justify-self: center;
+    width: 570px;
+    height: 350px;
 }
