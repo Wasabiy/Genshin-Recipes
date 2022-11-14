@@ -13,7 +13,6 @@
     <div id="titleimg">
         <img id = "tittelbildet" src="images/logo/billetter.png" alt="Billetter">
     </div>
-
     <div id = "content">
         <div id="innerBody">
             <p>Skal du dra på Syngfonia alene eller i en gruppe? <br> Pris per person uansett alder: 200kr, <br> Familier får en rabatt på 25% <br> Vennegrupper får en rabatt på 10%</p>
@@ -32,6 +31,8 @@
                 <input type="email" name="epost" id="epostFam" required> <br> <br>
                 <label for="tlf">Skriv inn telefonummer: </label>
                 <input type="number" name="tlf" id="tlfFam" required> <br> <br>  
+                <label for="dato1">Velg dato: </label>
+                <input type="date" name="dato1" id="dato1" min="2022-06-10" max="2022-06-13" required> <br> <br>  
                 <button id="registrerFam" name="registrer">Kjøp billett</button>
             </div>
             <div class ="valgdiv" id="vennerDiv">
@@ -41,6 +42,8 @@
                 <input type="text" name="epost" id="epostVenn" required> <br> <br>
                 <label for="tlf">Skriv inn telefonummer: </label>
                 <input type="number" name="tlf" id="tlfVenn" required> <br> <br>  
+                <label for="dato2">Velg dato: </label>
+                <input type="date" name="dato2" id="dato2" min="2022-06-10" max="2022-06-13" required> <br> <br>  
                 <button id="registrerVenn" name="registrer">Kjøp billett</button>
             </div>
             <div class ="valgdiv" id="aleneDiv">
@@ -52,6 +55,8 @@
                 <input type="email" name="epost" id="epost" required> <br> <br>
                 <label for="tlf">Skriv inn telefonummer: </label>
                 <input type="number" name="tlf" id="tlf" required> <br> <br>  
+                <label for="dato3">Velg dato: </label>
+                <input type="date" name="dato3" id="dato3" min="2022-06-10" max="2022-06-13" required> <br> <br>  
                 <button id="registrer" name="registrer">Kjøp billett</button>
             </div>
         
@@ -76,17 +81,22 @@
     var innerBody = document.getElementById("innerBody");
     var pris = 200;
 
+    registrerFam.addEventListener("click", function finish(){
+        
+    })
+
     document.addEventListener("change", function onChange(){ 
                 if(document.getElementById("familie").checked){
                     familiediv.style.display ="block";
                     let antallFam = document.getElementById("antallFam").value;
                     let epostFam = document.getElementById("epostFam").value;
                     let tlfFam = document.getElementById("tlfFam").value;
+                    let dateFam = document.getElementById("dato1").value;
                     registrerFam.addEventListener("click", function writeOutAleneInputFam(){
                         let sum = antallFam * pris * 0.75;
                         innerBody.innerHTML = "";
                         innerBody.innerHTML = "Da har du kjøpt billettene til familien din! De er registrert under bestillers epost og telefonnummner. Dette er billettene dine, ta gjerne et bilde <br>"
-                        innerBody.innerHTML = "Antallet billetter: " + antallFam  + "<br>" + "Din epost: " + epostFam + "<br>" + "Ditt telefonnummer: " + tlfFam + "<br> Totalpris: " + sum;
+                        innerBody.innerHTML = "Antallet billetter: " + antallFam  + "<br>" + "Din epost: " + epostFam + "<br>" + "Ditt telefonnummer: " + tlfFam + "<br> Valgt dato: " + dateFam  + "<br> Totalpris: " + sum;
                     });
                 } else{
                     familiediv.style.display ="none";
@@ -97,11 +107,12 @@
                     let antallVenn= document.getElementById("antallVenn").value;
                     let epostVenn = document.getElementById("epostVenn").value;
                     let tlfVenn = document.getElementById("tlfVenn").value;
+                    let datoVenn = document.getElementById("dato2").value;
                     registrerVenn.addEventListener("click", function writeOutAleneInputVenn(){
                         let sum = antallVenn * pris * 0.10;
                         innerBody.innerHTML = "";
                         innerBody.innerHTML = "Da har du kjøpt billettene til vennene dine! De er registrert under din epost og telefonnummner. Dette er billettene dine, ta gjerne et bilde <br>"
-                        innerBody.innerHTML = "Antallet billetter: " + antallVenn  + "<br>" + "Din epost: " + epostVenn + "<br>" + "Ditt telefonnummer: " + tlfVenn + "<br> Totalpris: " + sum;
+                        innerBody.innerHTML = "Antallet billetter: " + antallVenn  + "<br>" + "Din epost: " + epostVenn + "<br>" + "Ditt telefonnummer: " + tlfVenn + "<br> Valgt dato: " + datoVenn + "<br> Totalpris: " + sum;
                     });
                 } else{
                     vennerDiv.style.display = "none";
@@ -113,16 +124,17 @@
                     let aleneAlder = document.getElementById("alder").value;
                     let aleneEpost = document.getElementById("epost").value;
                     let aleneTlf = document.getElementById("tlf").value;
+                    let datoTlf = document.getElementById("dato3").value;
                     registrerKnapp.addEventListener("click", function writeOutAleneInput(){
                         innerBody.innerHTML = "";
                         innerBody.innerHTML = "Da har du kjøpt billettene! Dette er billettene dine, ta gjerne et bilde <br>"
-                        innerBody.innerHTML = "Navn: " + aleneNavn  + "<br>" + "alder: " + aleneAlder + "<br>" + "epost: " + aleneEpost + "<br>" + "Telefonnummer: " + aleneTlf + "<br>" + "Totalpris: " + pris;
+                        innerBody.innerHTML = "Navn: " + aleneNavn  + "<br>" + "alder: " + aleneAlder + "<br>" + "epost: " + aleneEpost + "<br>" + "Telefonnummer: " + aleneTlf + "<br>" + "Valgt dato: " + datoTlf + "<br> Totalpris: " + pris;
                     });
                 } else{
                     alenediv.style.display = "none";
                 }
             })
-       
+
     </script>
     <script src="script/universalis.js"></script>
 </body>

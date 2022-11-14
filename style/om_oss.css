@@ -45,7 +45,8 @@ body{
     height: 470px;
     width: 590px;
     background-color: inherit;
-    margin-top: 30px;
+    margin-top: 50px;
+    margin: 120px;
     border-radius: 10px;
     position: relative;
     box-shadow: 0 0 20px 20px #1c2333;

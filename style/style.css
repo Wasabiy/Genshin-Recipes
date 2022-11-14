@@ -50,10 +50,10 @@ footer {
     align-items: center;
     display: flex;
     background-color: #283754;
-    position: absolute;
+    position: sticky;
     bottom: 0;
     width: 100%;
-    
+    z-index: 11;
 }
 
 footer a, .footer-linker a{
