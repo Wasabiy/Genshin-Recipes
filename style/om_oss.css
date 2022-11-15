@@ -79,3 +79,10 @@ img {
     width: 570px;
     height: 350px;
 }
+
+.btns{
+    position: absolute;
+}
+a:hover{
+    cursor: pointer;
+}
