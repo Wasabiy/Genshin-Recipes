@@ -13,7 +13,6 @@ export default function Generator() {
             .then((response) => {
                  setKeys(Object.keys(response.data));
                 setFood(Object.values(response.data));
-
             });
     }, []);
 

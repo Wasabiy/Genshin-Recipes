@@ -1,17 +1,16 @@
 export interface Food {
-    name?: string,
-    rarity?: number,
-    type?: Type,
-    effect?: string,
+    name: string,
+    rarity: number,
+    type: Type,
+    effect: string,
     hasRecipe?: boolean,
-    description?: string,
+    description: string,
     character?: string,
     baseDish?: string,
-    recipe?: Recipe[],
-    proficiency?: number | string,
+    recipe: Recipe[],
+    proficiency: number | string,
     event?: string,
-    charcter?: string,
-    food: any
+    isFavorited?: boolean,
 }
 
 export interface Recipe {

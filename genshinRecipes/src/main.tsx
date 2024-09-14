@@ -7,6 +7,6 @@ import EmptyContainer from "./components/EmptyContainer.tsx";
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <App />
-      <EmptyContainer/>
+    <h1>HEI</h1>  
   </StrictMode>,
 )
