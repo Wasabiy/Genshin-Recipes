@@ -17,6 +17,11 @@ export interface Recipe {
     item:     string;
     quantity: number;
 }
+export interface Ingredient{
+    name: string,
+    description: string,
+    sources: string[]
+}
 
 export enum Type {
     ATKBoostingDish = "ATK-Boosting Dish",

@@ -1,0 +1,29 @@
+#displayBox {
+    max-width: 900px;
+    margin: auto;
+    padding: 1rem;
+    text-align: center;
+    background-color: rgba(187, 231, 231, 0.93);
+    width: fit-content;
+    height: 1280px;
+    overflow-y: scroll
+  
+  
+  
+  }
+  
+  #recipesBox {
+  
+    max-width: 700px;
+    justify-content: space-between;
+    align-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    flex: 1;
+    padding: 0;
+    height: auto;
+    font-size: small;
+  
+  
+  }

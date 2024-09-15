@@ -20,13 +20,11 @@ function App() {
     <>
      {food && food?.map((value,index) =>{
     
-       try {
-       <>
-        <RecipeCard  food={value} src={`https://genshin.jmp.blue/consumables/food/${keys?.[index]}`}/>
-        </>
-       } catch (error) {
-        console.log(error)
-       }
+     
+      
+        return <RecipeCard  food={value} src={`https://genshin.jmp.blue/consumables/food/${keys?.[index]}`} isFavorited={false}/>
+      
+     
      })}
 
     </>

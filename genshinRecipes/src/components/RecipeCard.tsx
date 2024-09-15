@@ -4,15 +4,10 @@ import 'react-router-dom'
 import {Food} from "../api/recipes/interface.ts"
 
 
-function RecipeCard({food,src}: {food: Food, src: string}) {
+function RecipeCard({food, src, isFavorited}: {food: Food, src: string, isFavorited: boolean}) {
     
-    const [recipeTitle, setRecipeTitle] = useState(food.name);
-    const [isLiked, setIsLiked] = useState(food.isFavorited);
-    const [recipeDescription, setRecipeDescription] = useState(food.description);
-    const [recipeRarity, setRecipeRarity] = useState(food.rarity);
-    const [recipeProficiency, setRecipeProficiency] = useState(food.proficiency);
-    const [recipeIngredients, setRecipeIngredients] = useState(food.recipe);
-
+    const [isLiked, setIsLiked] = useState(isFavorited);
+   
     const handleFavoriteChange = () => {
             setIsLiked(!isLiked);
     };
@@ -20,9 +15,11 @@ function RecipeCard({food,src}: {food: Food, src: string}) {
     return (
         <>
         <figure className="cardSquares">
-            <img className="recipeImages" src={src} alt={recipeTitle} width="50" height="60"></img>
-            <p className="recipeNames">{recipeTitle}</p>
-            <button onClick={handleFavoriteChange} className={isLiked ? "likedButton" : "normalButton"}></button>
+            <figure className="imageButton">
+                <img className="recipeImages" src={src} alt={food.name} width="50" height="60"></img>
+                <button onClick={handleFavoriteChange} className={isLiked ? "likedButton" : "normalButton"}></button>
+                </figure>
+            <p className="recipeNames">{food.name}</p> 
         </figure>
         </>
     )};
