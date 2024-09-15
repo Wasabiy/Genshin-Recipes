@@ -1,0 +1,43 @@
+.cardSquares{
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(111, 218, 186, 0.89);
+    margin: 3px;
+    padding: 5px;
+    width: 120px;
+    height: 120px;
+    font-size-adjust: inherit;
+
+}
+.imageButton{
+    position: relative;
+    margin: 0;
+}
+.likedButton{
+    position: absolute;
+    background-color: greenyellow;
+    top: 2px;
+    right: 2px;
+    margin: 1px;
+
+}
+.normalButton{
+    position: absolute;
+    background-color: whitesmoke;
+    top: 2px;
+    right: 2px;
+    margin: 1px;
+}
+.recipeImages{
+    display: flex;
+    width: 80px;
+    height: 80px;
+    margin: 0;
+    padding: 0;
+}
+.recipeNames{
+    display: flex;
+    margin: 2px;
+    font-size: inherit;
+
+}
