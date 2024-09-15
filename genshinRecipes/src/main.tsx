@@ -7,6 +7,6 @@ import RecipesPage from './components/RecipesPage.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RecipesPage/>
+    <App/>
   </StrictMode>,
 )

@@ -1,3 +1,7 @@
+export type KeyFood = {
+    key: string,
+} & Food
+
 export interface Food {
     name: string,
     rarity: number,
