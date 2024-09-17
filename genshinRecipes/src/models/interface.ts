@@ -26,6 +26,9 @@ export interface Ingredient{
     description: string,
     sources: string[]
 }
+export type KeyIngredient = {
+    key: string,
+} & Ingredient
 
 export enum Type {
     ATKBoostingDish = "ATK-Boosting Dish",
