@@ -1,34 +1,41 @@
 import { useEffect, useState } from 'react'
-import './App.css'
+import { Route, Routes } from "react-router-dom";
 import axios from 'axios'
-import { Food } from './api/recipes/interface'
-import RecipeCard from './components/RecipeCard.tsx';
+import { KeyFood } from './models/interface.ts'
+import RecipePage from './pages/RecipesPage.tsx';
+import RecipeInfoPage from './pages/RecipeInfoPage.tsx';
+
 
 function App() {
  
-  const [food, setFood] = useState<Food[] | null>();
-  const [keys, setKeys] = useState<string[] | null>();
+  const [food, setFood] = useState<KeyFood[] | null>();
 
-  useEffect(() => {
+  /*useEffect(() => {
       axios.get('https://genshin.jmp.blue/consumables/food')
           .then((response) => {
-               setKeys(Object.keys(response.data));
-              setFood(Object.values(response.data));
+              const itemList : KeyFood[] = Object.entries(response.data).map((value: [string, any]) => {
+                  const key = value[0];
+                  const mat = value[1];
+                  return {
+                      ...mat,
+                      key: key,
+                  } as KeyFood
+              });
+              setFood(itemList);
           });
-  }, []);
+  }, []);*/
+
   return (
     <>
-     {food && food?.map((value,index) =>{
-    
-     
-      
-        return <RecipeCard  food={value} src={`https://genshin.jmp.blue/consumables/food/${keys?.[index]}`} isFavorited={false}/>
-      
-     
-     })}
-
+      <Routes>
+        <Route index element={<RecipePage />}/>
+        <Route path="/recipes/:recipeTitle" element={<RecipeInfoPage />}/>
+        <Route path="/favorites" />
+        <Route path="/ingredientsPage" />
+        <Route path="/ingredientInfo" />
+      </Routes>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
