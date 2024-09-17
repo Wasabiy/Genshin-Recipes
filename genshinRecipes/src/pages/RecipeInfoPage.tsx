@@ -23,18 +23,19 @@ function RecipeInfoPage() {
         <>
         <h2>{details && details.name}</h2>
         <section id="detailList">
-            <ul>
+            <ul id="details">
                 <li> Rarity: {details && [...Array(details.rarity)].map((star, index) => (
                         <img key={"star" + index} src={rarityStar} alt="star" width="20" height="20" />))}
                 </li>
                 <li> Type: {details && details.type} </li>
                 <li> Proficiency: {details && details.proficiency} </li>
                 <li> Effect: {details && details.effect} </li>
-                <section>
+                <section id="ingredientBox">
                     <h4>Ingredients</h4>
                     {details && details.recipe.map(x => 
+                    <div id="ingredientList">
                         <p>{x.item} x {x.quantity}</p>
-                    )}
+                    </div>)}
                 </section>
                 <section id="descBox">
                     <h4 id="descHeader">Description</h4>

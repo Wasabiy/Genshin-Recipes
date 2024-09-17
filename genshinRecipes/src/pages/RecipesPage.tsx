@@ -29,7 +29,6 @@ function RecipeGen() {
                const data:KeyFood[] = reformatData(response1.data,"KeyFood");
                 setFood(data);
                 setItemList(data);
-                console.log(data.find(x => x.key == 'pile-em-up'))
             });
         axios.get('https://genshin.jmp.blue/materials/cooking-ingredients/')
             .then((response2 => {
