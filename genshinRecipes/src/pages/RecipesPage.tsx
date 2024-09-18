@@ -43,7 +43,6 @@ function RecipeGen() {
         /*vi tenkte at denne kan være for både filtreringsmenyen og søkebaren; om
         man skal filtrere på "ATK boosting dish" så vil condition være "atk-boosting-dish" f.eks.. 
         men gjør det du vil seff!*/
-
     }
 
     function sortRecipes() {
