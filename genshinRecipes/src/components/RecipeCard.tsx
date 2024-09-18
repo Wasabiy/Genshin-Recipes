@@ -10,16 +10,21 @@ function RecipeCard({food, src, isFavorited}: {food: KeyFood, src: string, isFav
     const [isLiked, setIsLiked] = useState(isFavorited);
    
     useEffect(() => {
-        const localIsLiked = localStorage.getItem(food.key);
+        const localIsLiked = localStorage.getItem(food);
         if (localIsLiked !== null) {
             setIsLiked(localIsLiked === 'true');
         }
     }, [food.key]);
 
     const handleFavoriteChange = () => {
-            const likedBool = !isLiked;
-            setIsLiked(likedBool);
-            localStorage.setItem(food.key, (likedBool).toString());
+        const likedBool = !isLiked;
+        setIsLiked(likedBool);
+        if (likedBool == false){
+            localStorage.removeItem(food);
+        } else {
+            localStorage.setItem(food, (likedBool).toString());
+        }
+        
     };
 
     return (

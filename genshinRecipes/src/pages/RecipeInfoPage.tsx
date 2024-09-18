@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { useParams } from 'react-router-dom'
 import { KeyFood } from "../models/interface.ts"
-import { reformatData } from "../utils/reformatData.ts";
+import { reformatData } from "../utils/globalFunctions.ts";
 import axios from "axios";
 import rarityStar from "../assets/rarityStar.png"
 import "./RecipeInfoPage.css"
@@ -23,7 +23,7 @@ function RecipeInfoPage() {
 
     useEffect(() => {
     if (details?.key) {
-        const localIsLiked = localStorage.getItem(details.key);
+        const localIsLiked = localStorage.getItem(details);
         if (localIsLiked !== null) {
             setIsLiked(localIsLiked === 'true');
             }
@@ -33,7 +33,7 @@ function RecipeInfoPage() {
     const handleFavoriteChange = () => {
             const likedBool = !isLiked;
             setIsLiked(likedBool);
-            localStorage.setItem(details.key, (likedBool).toString());
+            localStorage.setItem(details, (likedBool).toString());
     };
 
 

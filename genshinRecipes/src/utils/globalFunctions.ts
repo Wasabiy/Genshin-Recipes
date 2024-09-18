@@ -10,3 +10,9 @@ export function reformatData(data,type) {
         } as typeof type;
     });
 };
+
+/*export function handleFavoriteChange(state) {
+    const likedBool = !isLiked;
+    setIsLiked(likedBool);
+    localStorage.setItem(food, (likedBool).toString());
+};*/
