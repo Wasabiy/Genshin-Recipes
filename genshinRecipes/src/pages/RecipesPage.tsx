@@ -29,7 +29,6 @@ function RecipeGen() {
                const data:KeyFood[] = reformatData(response1.data,"KeyFood");
                 setFood(data);
                 setItemList(data);
-                console.log(data.find(x => x.key == 'pile-em-up'))
             });
         axios.get('https://genshin.jmp.blue/materials/cooking-ingredients/')
             .then((response2 => {
@@ -53,7 +52,7 @@ function RecipeGen() {
     return (
         <>
             <h2 id="header">Recipes</h2>
-            <span id="itemAmount">showing {itemList && itemList.length} recipes</span>
+            <span id="itemAmount">showing {itemList?.length} recipes</span>
             <section id="filterSection">
                 <span id="type">Type</span>
                 <section id="filterList">
@@ -68,7 +67,7 @@ function RecipeGen() {
             <section id="ingredientFilter">
                 <span>Ingredients</span>
                 <section id="ingredientsList">
-                    {ingredients && ingredients?.map((value) => {
+                    {ingredients?.map((value) => {
                         return <label key={value.name}>
                             <input type="checkbox"/>
                             {value.name}
@@ -80,7 +79,7 @@ function RecipeGen() {
 
             <section key="display" id="displayBox">
                 <section key="recipeBox" id="recipesBox">
-                    {food && food?.map((value) => {
+                    {food?.map((value) => {
                         return <RecipeCard food={value}
                                            src={`https://genshin.jmp.blue/consumables/food/${value.key}`}
                                            isFavorited={false}/>

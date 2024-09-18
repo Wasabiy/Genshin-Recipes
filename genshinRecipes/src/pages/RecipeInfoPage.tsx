@@ -1,14 +1,16 @@
 import { useState, useEffect } from "react"
 import { useParams } from 'react-router-dom'
-import { KeyFood, KeyIngredient } from "../models/interface.ts"
+import { KeyFood } from "../models/interface.ts"
 import { reformatData } from "../utils/reformatData.ts";
 import axios from "axios";
 import rarityStar from "../assets/rarityStar.png"
+import "./RecipeInfoPage.css"
 
 function RecipeInfoPage() {
     //const [isLiked, setIsLiked] = useState(isFavorited);
     const { recipeTitle } = useParams();
     const [details, setDetails] = useState<KeyFood | null>();
+    const [isLiked, setIsLiked] = useState<any | null>();
 
     
     useEffect(() => {
@@ -19,31 +21,50 @@ function RecipeInfoPage() {
             }); 
     }, []);
 
+    useEffect(() => {
+    if (details?.key) {
+        const localIsLiked = localStorage.getItem(details.key);
+        if (localIsLiked !== null) {
+            setIsLiked(localIsLiked === 'true');
+            }
+        }
+    }, [details]);
+
+    const handleFavoriteChange = () => {
+            const likedBool = !isLiked;
+            setIsLiked(likedBool);
+            localStorage.setItem(details.key, (likedBool).toString());
+    };
+
+
     return (
         <>
-        <h2>{details && details.name}</h2>
+        <h2>{details?.name}</h2>
+        <button id={isLiked ? "likedBtn" : "notLikedBtn"} onClick={handleFavoriteChange}>♥♥♥</button>
         <section id="detailList">
-            <ul>
-                <li> Rarity: {details && [...Array(details.rarity)].map((star, index) => (
+            <ul id="details">
+                <li> Rarity: {[...Array(details?.rarity)].map((star, index) => (
                         <img key={"star" + index} src={rarityStar} alt="star" width="20" height="20" />))}
                 </li>
-                <li> Type: {details && details.type} </li>
-                <li> Proficiency: {details && details.proficiency} </li>
-                <li> Effect: {details && details.effect} </li>
-                <section>
+                <li> Type: {details?.type} </li>
+                <li> Proficiency: {details?.proficiency} </li>
+                <li> Effect: {details?.effect} </li>
+                <section id="ingredientBox">
                     <h4>Ingredients</h4>
-                    {details && details.recipe.map(x => 
-                        <p>{x.item} x {x.quantity}</p>
-                    )}
+                    <div id="ingredientList">
+                        {details?.recipe.map(x => 
+                            <p>{x.item} x {x.quantity}</p>
+                            )}
+                    </div>
                 </section>
                 <section id="descBox">
                     <h4 id="descHeader">Description</h4>
-                    <span id="description">{details && details.description}</span>
+                    <span id="description">{details?.description}</span>
                 </section>
             </ul>
         </section>
         <section id="imgSection">
-            <img src={`https://genshin.jmp.blue/consumables/food/${details && details.key}`} />
+            <img src={`https://genshin.jmp.blue/consumables/food/${details?.key}`} />
         </section>
         </>
     )

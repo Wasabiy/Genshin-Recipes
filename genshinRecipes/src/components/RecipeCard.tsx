@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import "./RecipeCard.css";
 import 'react-router-dom'
 import { KeyFood } from "../models/interface.ts"
@@ -9,9 +9,17 @@ function RecipeCard({food, src, isFavorited}: {food: KeyFood, src: string, isFav
     
     const [isLiked, setIsLiked] = useState(isFavorited);
    
+    useEffect(() => {
+        const localIsLiked = localStorage.getItem(food.key);
+        if (localIsLiked !== null) {
+            setIsLiked(localIsLiked === 'true');
+        }
+    }, [food.key]);
+
     const handleFavoriteChange = () => {
-            setIsLiked(!isLiked);
-            localStorage.setItem(food.key, (!isLiked).toString());
+            const likedBool = !isLiked;
+            setIsLiked(likedBool);
+            localStorage.setItem(food.key, (likedBool).toString());
     };
 
     return (
