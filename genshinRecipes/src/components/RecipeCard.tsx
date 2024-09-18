@@ -1,26 +1,41 @@
-import { useState } from 'react'
-import "./dummy.css";
+import { useEffect, useState } from 'react'
+import "./RecipeCard.css";
 import 'react-router-dom'
-import {Food} from "../api/recipes/interface.ts"
+import { KeyFood } from "../models/interface.ts"
+import { Link } from 'react-router-dom';
 
 
-function RecipeCard({food, src, isFavorited}: {food: Food, src: string, isFavorited: boolean}) {
+function RecipeCard({food, src, isFavorited}: {food: KeyFood, src: string, isFavorited: boolean}) {
     
     const [isLiked, setIsLiked] = useState(isFavorited);
    
+    useEffect(() => {
+        const localIsLiked = localStorage.getItem(food.key);
+        if (localIsLiked !== null) {
+            setIsLiked(localIsLiked === 'true');
+        }
+    }, [food.key]);
+
     const handleFavoriteChange = () => {
-            setIsLiked(!isLiked);
+            const likedBool = !isLiked;
+            setIsLiked(likedBool);
+            localStorage.setItem(food.key, (likedBool).toString());
     };
 
     return (
         <>
-        <figure className="cardSquares">
-            <figure className="imageButton">
-                <img className="recipeImages" src={src} alt={food.name} width="50" height="60"></img>
-                <button onClick={handleFavoriteChange} className={isLiked ? "likedButton" : "normalButton"}></button>
-                </figure>
-            <p className="recipeNames">{food.name}</p> 
-        </figure>
+        <Link to={`/recipes/${food.key}`} className="infoLink">
+            <figure key={food.key} className="cardSquares">
+                <figure className="imageButton">
+                    <img className="recipeImages" src={src} alt={food.name} width="50" height="60"></img>
+                    <button key={food.key + "Btn"} onClick={(e) => { 
+                        e.preventDefault();
+                        handleFavoriteChange();
+                        }} className={isLiked ? "likedButton" : "normalButton"}></button>
+                    </figure>
+                <p className="recipeNames">{food.name}</p> 
+            </figure>
+        </Link>
         </>
     )};
 
