@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useParams } from 'react-router-dom'
-import { KeyFood, KeyIngredient } from "../models/interface.ts"
+import { KeyFood } from "../models/interface.ts"
 import { reformatData } from "../utils/reformatData.ts";
 import axios from "axios";
 import rarityStar from "../assets/rarityStar.png"
