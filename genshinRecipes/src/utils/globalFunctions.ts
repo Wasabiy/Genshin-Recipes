@@ -12,7 +12,7 @@ export function reformatData(data, type) {
             key: key,
         } as typeof type;
     });
-};
+}
 
 export function getFavoriteState(food: KeyFood) {
     try {
