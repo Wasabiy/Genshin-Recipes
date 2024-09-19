@@ -6,15 +6,23 @@ import {
   getFavoriteState,
   reformatData,
 } from "../utils/globalFunctions.ts";
-import axios from "axios";
 import rarityStar from "../assets/rarityStar.png";
 import "./RecipeInfoPage.css";
 import like from "../assets/like.png";
 import liked from "../assets/liked.png";
 import { fetchFood } from "../utils/apiCalls.ts";
-import { useQuery } from "@tanstack/react-query";
+import {QueryClient, useQuery} from "@tanstack/react-query";
+import {QueryClientProvider} from "@tanstack/react-query";
 
-function RecipeInfoPage() {
+const queryClient = new QueryClient();
+export default function RecipeInfoPage() {
+  return (
+      <QueryClientProvider client={queryClient}>
+        <RecipeInfo/>
+      </QueryClientProvider>
+  );
+}
+function RecipeInfo() {
   const { recipeTitle } = useParams();
   const [details, setDetails] = useState<KeyFood | null>();
   const [isLiked, setIsLiked] = useState(Boolean);
@@ -75,13 +83,13 @@ function RecipeInfoPage() {
           <section id="ingredientBox">
             <h4>Ingredients</h4>
             <div id="ingredientList">
-              {details?.recipe ? (
-                <p>Null</p>
+              {details?.recipe == undefined ?  (
+                <p>No Recipe</p>
               ) : (
                 details?.recipe &&
-                details?.recipe.map((x) => (
-                  <p key={x.item}>
-                    {x.item} x {x.quantity}
+                details?.recipe.map((value) => (
+                  <p key={value.item}>
+                    {value.item} x {value.quantity}
                   </p>
                 ))
               )}
