@@ -2,9 +2,19 @@ import { useState, useEffect } from "react"
 import { useParams } from 'react-router-dom'
 import {Food, KeyFood} from "../models/interface.ts"
 import {changeFavoriteState, getFavoriteState, reformatData} from "../utils/globalFunctions.ts";
-import axios from "axios";
 import rarityStar from "../assets/rarityStar.png"
 import "./RecipeInfoPage.css"
+import {QueryClient, QueryClientProvider, useQuery} from "@tanstack/react-query";
+import {fetchFood} from "../utils/apiCalls.ts";
+
+const queryClient = new QueryClient()
+export default function RecipePage() {
+    return (
+        <QueryClientProvider client={queryClient}>
+            <RecipeInfoPage/>
+        </QueryClientProvider>
+    )
+}
 
 function RecipeInfoPage() {
 
@@ -25,15 +35,19 @@ function RecipeInfoPage() {
         setIsLiked(!likedBool);
         changeFavoriteState(keyedFood);
     };
-
+    const {data: foodData, status: foodStatus} =
+        useQuery({
+            queryKey: ["foodData"],
+            queryFn: fetchFood
+        })
     useEffect(() => {
-        axios.get('https://genshin.jmp.blue/consumables/food')
-            .then((response1) => {
-               const data:KeyFood[] = reformatData(response1.data, "KeyFood");
-               setDetails(data.find(x => x.key == recipeTitle))
-            });
-        getFavoriteState(keyedFood)
-    }, []);
+            if (foodStatus == "success") {
+                const data:KeyFood[] = reformatData(foodData, "KeyFood");
+                setDetails(data.find(x => x.key == recipeTitle));
+                getFavoriteState(keyedFood)
+            }
+        }, [foodStatus]
+    )
 
     return (
         <>
@@ -69,4 +83,3 @@ function RecipeInfoPage() {
 
 
 }
-export default RecipeInfoPage;
