@@ -16,11 +16,9 @@ export default function RecipePage() {
 }
 
 function RecipeGen() {
-
     const [itemList, setItemList] = useState<KeyFood[] | null>();
     const [food, setFood] = useState<KeyFood[] | null>();
     const [ingredients, setIngredients] = useState<KeyIngredient[] | null>();
-
 
     //fetch data fra APIet
     useEffect(() => {
@@ -81,8 +79,7 @@ function RecipeGen() {
                 <section key="recipeBox" id="recipesBox">
                     {food?.map((value) => {
                         return <RecipeCard food={value}
-                                           src={`https://genshin.jmp.blue/consumables/food/${value.key}`}
-                                           isFavorited={false}/>
+                                           src={`https://genshin.jmp.blue/consumables/food/${value.key}`}/>
                     })}
                 </section>
             </section>
