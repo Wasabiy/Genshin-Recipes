@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import {changeFavoriteState, getFavoriteState} from "../utils/globalFunctions.ts";
 
 
-function RecipeCard({food, src}: {food: KeyFood, src: string}) {
+function RecipeCard({food, src, onFavoriteChanged}: {food: KeyFood, src: string, onFavoriteChanged?:()=>void}) {
     
     const [isLiked, setIsLiked] = useState(Boolean);
 
@@ -22,6 +22,7 @@ function RecipeCard({food, src}: {food: KeyFood, src: string}) {
         const likedBool = getFavoriteState(food);
         setIsLiked(!likedBool);
         changeFavoriteState(food);
+        if (onFavoriteChanged) {onFavoriteChanged()}
     };
 
     return (

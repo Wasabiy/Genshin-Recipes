@@ -1,6 +1,10 @@
 import React from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
+import paimon from "../assets/paimon.png"
+import primogem from "../assets/primogem.png"
+import genshinFood from "../assets/genshinFood.png"
+
 
 const Navbar: React.FC = () => {
   return (
@@ -14,7 +18,7 @@ const Navbar: React.FC = () => {
         <li>
           <Link to="/recipes">
             <img
-              src="../src/assets/genshinFood.png"
+              src={genshinFood}
               alt="primo"
               id="textLogo"
             />
@@ -23,13 +27,13 @@ const Navbar: React.FC = () => {
         </li>
         <li>
           <Link to="/favorites">
-            <img src="../src/assets/star.png" alt="primo" id="textLogo" />
+            <img src={primogem} alt="primo" id="textLogo" />
             My Favorites
           </Link>
         </li>
         <li>
           <Link to="/about">
-            <img src="../src/assets/paimon.png" alt="paimon" />
+            <img src={paimon} alt="paimon" />
             About
           </Link>
         </li>

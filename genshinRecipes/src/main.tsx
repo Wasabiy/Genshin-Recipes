@@ -3,11 +3,10 @@ import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 import { BrowserRouter } from "react-router-dom";
-import RecipePage from './pages/RecipesPage.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename={"/project1"}>
       <App/>
     </BrowserRouter>
   </StrictMode>,
