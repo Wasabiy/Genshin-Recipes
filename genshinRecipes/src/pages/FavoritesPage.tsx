@@ -10,6 +10,7 @@ function FavoritesPage() {
     function fetchFavoriteRecipes() {
         let arr: KeyFood[] = [];
         (Object.keys({...localStorage})).map(value => {
+            // @ts-ignore
             let detail = JSON.parse(localStorage.getItem(value));
             arr.push(detail);
         })
@@ -18,7 +19,7 @@ function FavoritesPage() {
 
     useEffect(() => {
         fetchFavoriteRecipes();
-    }, [favoriteRecipes]);
+    }, []);
     
     return (
         <>
@@ -26,7 +27,7 @@ function FavoritesPage() {
                 <section key="recipeBox" id="recipesBox">
                     {favoriteRecipes?.map((value) => {
                         return <RecipeCard food={value}
-                                           src={`https://genshin.jmp.blue/consumables/food/${value.key}`}/>
+                                           src={`https://genshin.jmp.blue/consumables/food/${value.key}`} onFavoriteChanged={fetchFavoriteRecipes}/>
                     })}
                 </section>
             </section>

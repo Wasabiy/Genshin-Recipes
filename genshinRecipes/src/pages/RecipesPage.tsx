@@ -20,6 +20,7 @@ function RecipeGen() {
     const [food, setFood] = useState<KeyFood[] | null>();
     const [ingredients, setIngredients] = useState<KeyIngredient[] | null>();
 
+
     //fetch data fra APIet
     useEffect(() => {
         axios.get('https://genshin.jmp.blue/consumables/food')
@@ -36,16 +37,16 @@ function RecipeGen() {
             )
     }, []);
 
-    function filterRecipes(condition: string, itemList: KeyFood[]) {
+    /*function filterRecipes(condition: string, itemList: KeyFood[]) {
         //skriv noe her Jayan💀
         /*vi tenkte at denne kan være for både filtreringsmenyen og søkebaren; om
         man skal filtrere på "ATK boosting dish" så vil condition være "atk-boosting-dish" f.eks.. 
-        men gjør det du vil seff!*/
-    }
+        men gjør det du vil seff!
+    }*/
 
-    function sortRecipes() {
+   /* function sortRecipes() {
         //do ur thing bestieee <3
-    }
+    }*/
 
     return (
         <>
