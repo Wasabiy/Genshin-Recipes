@@ -1,10 +1,10 @@
 import {useState, useEffect} from "react";
 import "./RecipesPage.css";
 import axios from 'axios'
-import {Food, KeyFood, KeyIngredient} from "../models/interface.ts";
+import { KeyFood, KeyIngredient} from "../models/interface.ts";
 import RecipeCard from "../components/RecipeCard.tsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { reformatData } from "../utils/reformatData.ts";
+import { reformatData } from "../utils/globalFunctions.ts";
 
 
 export default function RecipePage() {
@@ -16,11 +16,9 @@ export default function RecipePage() {
 }
 
 function RecipeGen() {
-
     const [itemList, setItemList] = useState<KeyFood[] | null>();
     const [food, setFood] = useState<KeyFood[] | null>();
     const [ingredients, setIngredients] = useState<KeyIngredient[] | null>();
-
 
     //fetch data fra APIet
     useEffect(() => {
@@ -38,7 +36,7 @@ function RecipeGen() {
             )
     }, []);
 
-    function filterRecipes(condition: string, itemList: Food[]) {
+    function filterRecipes(condition: string, itemList: KeyFood[]) {
         //skriv noe her Jayan💀
         /*vi tenkte at denne kan være for både filtreringsmenyen og søkebaren; om
         man skal filtrere på "ATK boosting dish" så vil condition være "atk-boosting-dish" f.eks.. 
@@ -81,8 +79,7 @@ function RecipeGen() {
                 <section key="recipeBox" id="recipesBox">
                     {food?.map((value) => {
                         return <RecipeCard food={value}
-                                           src={`https://genshin.jmp.blue/consumables/food/${value.key}`}
-                                           isFavorited={false}/>
+                                           src={`https://genshin.jmp.blue/consumables/food/${value.key}`}/>
                     })}
                 </section>
             </section>

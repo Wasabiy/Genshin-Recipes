@@ -3,23 +3,25 @@ import "./RecipeCard.css";
 import 'react-router-dom'
 import { KeyFood } from "../models/interface.ts"
 import { Link } from 'react-router-dom';
+import {changeFavoriteState, getFavoriteState} from "../utils/globalFunctions.ts";
 
 
-function RecipeCard({food, src, isFavorited}: {food: KeyFood, src: string, isFavorited: boolean}) {
+function RecipeCard({food, src}: {food: KeyFood, src: string}) {
     
-    const [isLiked, setIsLiked] = useState(isFavorited);
-   
+    const [isLiked, setIsLiked] = useState(Boolean);
+
     useEffect(() => {
-        const localIsLiked = localStorage.getItem(food.key);
-        if (localIsLiked !== null) {
-            setIsLiked(localIsLiked === 'true');
+        if(getFavoriteState(food)){
+            setIsLiked(true)
+        }else{
+            setIsLiked(false);
         }
-    }, [food.key]);
+    }, [food]);
 
     const handleFavoriteChange = () => {
-            const likedBool = !isLiked;
-            setIsLiked(likedBool);
-            localStorage.setItem(food.key, (likedBool).toString());
+        const likedBool = getFavoriteState(food);
+        setIsLiked(!likedBool);
+        changeFavoriteState(food);
     };
 
     return (
