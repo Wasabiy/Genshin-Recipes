@@ -1,43 +1,53 @@
-.cardSquares{
-    display: flex;
-    flex-direction: column;
-    background-color: rgba(111, 218, 186, 0.89);
-    margin: 3px;
-    padding: 5px;
-    width: 120px;
-    height: 120px;
-    font-size-adjust: inherit;
+.cardSquares {
+  display: flex;
+  flex-direction: column;
+  background-color: none;
+  margin: 3px;
+  padding: 5px;
+  width: 120px;
+  height: 120px;
+  font-size-adjust: inherit;
+}
+.imageButton {
+  position: relative;
+  margin: 0;
+}
 
+.likedButton {
+  position: absolute;
+  border: none;
+  height: 2rem;
+  top: 2px;
+  right: 2px;
 }
-.imageButton{
-    position: relative;
-    margin: 0;
-}
-.likedButton{
-    position: absolute;
-    background-color: greenyellow;
-    top: 2px;
-    right: 2px;
-    margin: 1px;
 
+.normalButton {
+  position: absolute;
+  border: none;
+  height: 2rem;
+  top: 2px;
+  right: 2px;
+  border-radius: 10px;
 }
-.normalButton{
-    position: absolute;
-    background-color: whitesmoke;
-    top: 2px;
-    right: 2px;
-    margin: 1px;
-}
-.recipeImages{
-    display: flex;
-    width: 80px;
-    height: 80px;
-    margin: 0;
-    padding: 0;
-}
-.recipeNames{
-    display: flex;
-    margin: 2px;
-    font-size: inherit;
 
+.normalButton:hover {
+    background-color:rosybrown;
+}
+
+.likedButton:hover{
+  background-color: rosybrown;
+  border-radius: 10px;
+}
+
+.recipeImages {
+  display: flex;
+  width: 80px;
+  height: 80px;
+  margin: 0;
+  padding: 0;
+}
+.recipeNames {
+  display: flex;
+  margin: 2px;
+  font-size: inherit;
 }

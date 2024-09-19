@@ -11,7 +11,7 @@ export interface Food {
     description: string,
     character?: string,
     baseDish?: string,
-    recipe: Recipe[],
+    recipe?: Recipe[],
     proficiency: number | string,
     event?: string,
     isFavorited?: boolean,
