@@ -11,6 +11,8 @@ import rarityStar from "../assets/rarityStar.png";
 import "./RecipeInfoPage.css";
 import like from "../assets/like.png";
 import liked from "../assets/liked.png";
+import { fetchFood } from "../utils/apiCalls.ts";
+import { useQuery } from "@tanstack/react-query";
 
 function RecipeInfoPage() {
   const { recipeTitle } = useParams();
@@ -30,14 +32,17 @@ function RecipeInfoPage() {
     setIsLiked(!likedBool);
     changeFavoriteState(keyedFood);
   };
-
+  const { data: foodData, status: foodStatus } = useQuery({
+    queryKey: ["foodData"],
+    queryFn: fetchFood,
+  });
   useEffect(() => {
-    axios.get("https://genshin.jmp.blue/consumables/food").then((response1) => {
-      const data: KeyFood[] = reformatData(response1.data, "KeyFood");
+    if (foodStatus == "success") {
+      const data: KeyFood[] = reformatData(foodData, "KeyFood");
       setDetails(data.find((x) => x.key == recipeTitle));
-    });
-    getFavoriteState(keyedFood);
-  }, []);
+      getFavoriteState(keyedFood);
+    }
+  }, [foodStatus]);
 
   return (
     <>
@@ -97,4 +102,3 @@ function RecipeInfoPage() {
     </>
   );
 }
-export default RecipeInfoPage;
