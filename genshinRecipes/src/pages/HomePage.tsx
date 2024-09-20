@@ -17,7 +17,7 @@ function HomePage() {
         <source src={homePageMovie} type="video/mp4" />
       </video>
     <section id="homeTitle">
-        <h1 id="wanminTitle" onClick={handleClick}>Welcome to Wanmin Restaurant. Press to see more...</h1>
+        <h1 id="wanminTitle" onClick={handleClick}>Welcome to Wanmin Restaurant. Press on this text to see more............</h1>
     </section>
 
     </section>

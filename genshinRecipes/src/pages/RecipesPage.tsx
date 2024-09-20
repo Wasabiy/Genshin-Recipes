@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Key } from "react";
 import "./RecipesPage.css";
 import { KeyFood, KeyIngredient } from "../models/interface.ts";
 import RecipeCard from "../components/RecipeCard.tsx";
@@ -23,8 +23,9 @@ function RecipeGen() {
   const [itemList, setItemList] = useState<KeyFood[] | null>();
   const [food, setFood] = useState<KeyFood[] | null>();
   const [ingredients, setIngredients] = useState<KeyIngredient[] | null>();
+  const [checkedValue, setCheckedValue] = useState<String[]>([]);
+  const [activeButtons, setActiveButtons] = useState<string[]>([]);
 
-  //fetch data fra APIet
   const { data: foodData, status: foodStatus } = useQuery({
     queryKey: ["foodData"],
     queryFn: fetchFood,
@@ -51,16 +52,68 @@ function RecipeGen() {
     }
   }, [ingredientStatus]);
 
-  /*function filterRecipes(condition: string, itemList: KeyFood[]) {
-        //skriv noe her Jayan💀
-        /*vi tenkte at denne kan være for både filtreringsmenyen og søkebaren; om
-        man skal filtrere på "ATK boosting dish" så vil condition være "atk-boosting-dish" f.eks.. 
-        men gjør det du vil seff!
-    }*/
+  useEffect(() => {
+    const savedFilters = JSON.parse(
+      sessionStorage.getItem("selectedIngredients") || "[]"
+    );
+    setCheckedValue(savedFilters);
 
-  /* function sortRecipes() {
-         //do ur thing bestieee <3
-     }*/
+
+      /*const checkboxes = document.querySelectorAll('input[type=checkbox');
+      const checkArray = [...Array(checkboxes)];
+      checkArray.map(x => {
+        if(savedFilters.includes(document.querySelector(`label[for=${}`))){
+          console.log("hey")
+        }
+      })*/
+  }, []);
+
+  const handleCheckboxChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    name: string
+  ) => {
+    const { checked } = event.target;
+
+    setCheckedValue((prevCheckedValues) => {
+      const newCheckedValues = checked
+        ? [...prevCheckedValues, name]
+        : prevCheckedValues.filter((value) => value !== name);
+
+      sessionStorage.setItem(
+        "selectedIngredients",
+        JSON.stringify(newCheckedValues)
+      );
+
+      return newCheckedValues;
+    });
+  };
+
+  function filterRecipes(a: KeyFood[]) {
+    const handleIngredientFilter = () => {
+      const filteredItems = a
+        ?.map((value: KeyFood) => {
+          const shouldRender = value.recipe?.some((ingredient) =>
+            checkedValue.includes(ingredient.item)
+          );
+
+          if (checkedValue.length === 0 || shouldRender) {
+            return (
+              <RecipeCard
+                key={value.key}
+                food={value}
+                src={`https://genshin.jmp.blue/consumables/food/${value.key}`}
+              />
+            );
+          }
+          return null;
+        })
+        .filter(Boolean);
+      return filteredItems;
+    };
+
+    const filteredRecipes = handleIngredientFilter();
+    return filteredRecipes;
+  }
 
   return (
     <>
@@ -71,7 +124,9 @@ function RecipeGen() {
           {" "}
           <section id="title">
             <h2 id="header">Recipes</h2>
-            <span id="itemAmount">showing {itemList?.length} recipes</span>
+            <span id="itemAmount">
+              showing {filterRecipes(food || []).length} recipes
+            </span>
           </section>
           <section id="filterSection">
             <span id="type">Type</span>
@@ -88,8 +143,11 @@ function RecipeGen() {
             <section id="ingredientsList">
               {ingredients?.map((value) => {
                 return (
-                  <label key={value.name}>
-                    <input type="checkbox" />
+                  <label htmlFor={value.name} key={value.name}>
+                    <input
+                      type="checkbox"
+                      onChange={(e) => handleCheckboxChange(e, value.name)}
+                    />
                     {value.name}
                     <img
                       src={`https://genshin.jmp.blue/materials/cooking-ingredients/${value.key}`}
@@ -101,14 +159,7 @@ function RecipeGen() {
           </section>
           <section key="displayFood" id="displayBox">
             <section key="recipeBox" id="recipesBox">
-              {food?.map((value) => {
-                return (
-                  <RecipeCard
-                    food={value}
-                    src={`https://genshin.jmp.blue/consumables/food/${value.key}`}
-                  />
-                );
-              })}
+              {filterRecipes(food || [])}
             </section>
           </section>
         </>

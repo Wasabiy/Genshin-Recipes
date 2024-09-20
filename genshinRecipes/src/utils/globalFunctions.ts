@@ -1,4 +1,4 @@
-//gjenbrukbar funksjon
+//reusable function
 
 import {KeyFood} from "../models/interface.ts";
 
@@ -33,3 +33,5 @@ export function changeFavoriteState(food: KeyFood) {
         localStorage.removeItem(food.key)
     }
 }
+
+

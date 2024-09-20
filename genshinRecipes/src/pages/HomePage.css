@@ -21,16 +21,15 @@ video {
   color: rgba(255, 255, 255, 0.7);
   margin: 0 auto;
   animation:
-    animated-text 4s steps(29, end) 1s 1 normal both,
-    animated-cursor 600ms steps(29, end) infinite;
+    animated-text 5s steps(35, end) infinite normal both,
+    animated-cursor 600ms steps(35, end) infinite;
 }
 
-
-#homeTitle{
-    margin-top: 10vh;
-    padding: 10px;
-    display: flex;
-    flex-wrap: wrap;
+#homeTitle {
+  margin-top: 10vh;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 @keyframes animated-text {
@@ -38,7 +37,7 @@ video {
     width: 0;
   }
   to {
-    width: 75vh;
+    width: 110vh;
   }
 }
 
@@ -51,3 +50,11 @@ video {
   }
 }
 
+@keyframes pause-text {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+  }
+}
