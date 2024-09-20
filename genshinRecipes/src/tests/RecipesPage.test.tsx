@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import '@testing-library/jest-dom';
 import { describe, expect, test, beforeAll, vi } from "vitest";
-import { server } from "./mockServer.ts"
+import { server } from "./mock/mockServer.ts"
 import { KeyFood, Type } from "../models/interface.ts";
 import RecipeCard from "../components/RecipeCard.tsx";
 import RecipesPage from "../pages/RecipesPage.tsx";

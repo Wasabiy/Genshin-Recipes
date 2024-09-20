@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import '@testing-library/jest-dom';
 import { describe, expect, test, beforeAll, vi } from "vitest";
-import { server } from "./mockServer.ts"
+import { server } from "./mock/mockServer.ts"
 import { KeyFood, Type } from "../models/interface";
 import RecipeCard from "../components/RecipeCard";
 import { changeFavoriteState, getFavoriteState } from "../utils/globalFunctions";
@@ -51,11 +51,9 @@ describe("RecipeCard.tsx snapshot test", () => {
     });
 });
 
-describe('testing RecipeCard functionality', () => {
-   
+describe('testing RecipeCard functionalities', () => {
+
         test('Check if isLiked state changes' , () => {
-        getFavoriteState.mockReturnValueOnce(false);
-        
         const { getByRole } = render(
             <MemoryRouter>
                 <RecipeCard food={mockFood} src={mockSrc} />
@@ -84,7 +82,7 @@ describe('testing RecipeCard functionality', () => {
                   }
             );
 
-            const cardSquares = (await screen.getByRole('link', { name: /sweet madame/i }));
+            const cardSquares = (screen.getByRole('link', { name: /sweet madame/i }));
             fireEvent.click(cardSquares);
             expect(screen.getByText('Sweet Madame')).toBeTruthy();
         })

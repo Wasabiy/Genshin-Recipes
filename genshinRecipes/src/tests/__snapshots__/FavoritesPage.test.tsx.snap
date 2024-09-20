@@ -1,0 +1,13 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`RecipesPage.tsx snapshot test > matches snapshot 1`] = `
+<DocumentFragment>
+  <section
+    id="displayBox"
+  >
+    <section
+      id="recipesBox"
+    />
+  </section>
+</DocumentFragment>
+`;
