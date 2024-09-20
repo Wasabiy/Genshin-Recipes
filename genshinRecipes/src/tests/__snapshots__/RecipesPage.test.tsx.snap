@@ -1,9 +1,0 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
-
-exports[`RecipesPage.tsx snapshot test > matches snapshot 1`] = `
-<DocumentFragment>
-  <h2>
-    Fetching data...
-  </h2>
-</DocumentFragment>
-`;

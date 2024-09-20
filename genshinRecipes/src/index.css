@@ -1,5 +1,7 @@
 :root {
-  font-family: OCR A Std, monospace;
+  font-family:
+    OCR A Std,
+    monospace;
   color-scheme: #795f80;
   color: rgba(255, 255, 255, 0.87);
   height: 100%;
@@ -7,7 +9,7 @@
   padding: 0;
 }
 
-#root{
+#root {
   height: 100%;
 }
 
