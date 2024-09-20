@@ -1,19 +1,14 @@
 :root {
-  font-family: ui-rounded, "Hiragino Maru Gothic ProN", Quicksand, Comfortaa,
-    Manjari, "Arial Rounded MT", "Arial Rounded MT Bold", Calibri,
-    source-sans-pro, sans-serif;
-  font-weight: normal;
-  line-height: 1.5;
-  font-weight: 400;
-
+  font-family: OCR A Std, monospace;
   color-scheme: #795f80;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+#root{
+  height: 100%;
 }
 
 a:hover {
@@ -23,12 +18,30 @@ a:hover {
 body {
   background-color: #9e7bb5;
   width: 100%;
+  height: 100%;
   margin: auto;
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f7cfec;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c8a0ca;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 button {
@@ -41,15 +54,6 @@ button {
   background-color: none;
   cursor: pointer;
   transition: border-color 0.25s;
-}
-
-button:hover {
-  border-color: #afbf48;
-}
-
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
 }
 
 @media (prefers-color-scheme: light) {

@@ -1,8 +1,19 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Arial', sans-serif;
+  font-family: OCR A Std, monospace;
   background-color: #FFFFFF;
+}
+
+.homePage {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(130, 108, 141);
+  opacity: 0.7; 
+  padding: 0 20px;
+  height: 100px;
+  border-bottom: 10px solid #6d4980;
 }
 
 .navbar {
@@ -10,6 +21,7 @@ body {
   justify-content: space-between;
   align-items: center;
   background-color: #826c8d; 
+  
   padding: 0 20px;
   height: 100px;
   border-bottom: 10px solid #6d4980;
@@ -84,5 +96,10 @@ body {
 
   .navbar-logo {
       margin-bottom: 10px;
+  }
+
+  .homePage{
+    flex-direction: column;
+    height: auto;
   }
 }

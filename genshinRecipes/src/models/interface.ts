@@ -5,13 +5,13 @@ export type KeyFood = {
 export interface Food {
     name: string,
     rarity: number,
-    type: Type,
+    type: DishType,
     effect: string,
     hasRecipe?: boolean,
     description: string,
     character?: string,
     baseDish?: string,
-    recipe: Recipe[],
+    recipe?: Recipe[],
     proficiency: number | string,
     event?: string,
     isFavorited?: boolean,
@@ -30,7 +30,7 @@ export type KeyIngredient = {
     key: string,
 } & Ingredient
 
-export enum Type {
+export enum DishType {
     ATKBoostingDish = "ATK-Boosting Dish",
     AdventurerSDish = "Adventurer's Dish",
     DEFBoostingDish = "DEF-Boosting Dish",

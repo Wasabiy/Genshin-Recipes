@@ -1,7 +1,11 @@
-#likedBtn {
-    background-color: #3aff00
+#likedBtn:hover {
+    background-color: rosybrown;
+    border-radius: 10px;
 }
 
-#notLikedBtn {
-    background-color: #ff0000
+#notLikedBtn:hover {
+    background-color: rosybrown;
+    border-radius: 10px;
 }
+
+
