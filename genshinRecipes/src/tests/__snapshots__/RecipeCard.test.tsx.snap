@@ -1,0 +1,34 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`RecipeCard.tsx snapshot test > matches snapshot 1`] = `
+<DocumentFragment>
+  <a
+    class="infoLink"
+    href="/recipes/sweet-madame"
+  >
+    <figure
+      class="cardSquares"
+    >
+      <figure
+        class="imageButton"
+      >
+        <img
+          alt="Sweet Madame"
+          class="recipeImages"
+          height="60"
+          src="https://genshin.jmp.blue/consumables/food/sweet-madame"
+          width="50"
+        />
+        <button
+          class="normalButton"
+        />
+      </figure>
+      <p
+        class="recipeNames"
+      >
+        Sweet Madame
+      </p>
+    </figure>
+  </a>
+</DocumentFragment>
+`;

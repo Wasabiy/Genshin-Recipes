@@ -32,7 +32,7 @@ function RecipeCard({food, src, onFavoriteChanged}: {food: KeyFood, src: string,
             <figure key={food.key} className="cardSquares">
                 <figure className="imageButton">
                     <img className="recipeImages" src={src} alt={food.name} width="50" height="60"></img>
-                    <img src={isLiked ? liked : like} key={food.key + "Btn"} onClick={(e) => { 
+                    <img alt={"likedButton"} src={isLiked ? liked : like} key={food.key + "Btn"} onClick={(e) => {
                         e.preventDefault();
                         handleFavoriteChange();
                         }} className={isLiked ? "likedButton" : "normalButton"}></img>
