@@ -7,7 +7,7 @@ function AboutPage() {
     return (
         <>
         <section id="allSections">
-            <h1>About Wanmin Restaurant</h1>
+            <h1 id="header1">About Wanmin Restaurant</h1>
             <div id="flexContainer">
             <section className="aboutBox" id="box1">
                 <p>Welcome to Wanmin Restaurant, Traveler! This website is a catalogue for recipes
