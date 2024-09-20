@@ -211,7 +211,6 @@ function RecipeGen() {
               </section>
             </section>
             <section key="displayFood" id="displayBox">
-            <h3 id="recipeDisplayText">These are the recipes you have called: </h3>
                 <section key="recipeBox" id="recipesBox">
                   {filterRecipes(food)}
                 </section>

@@ -1,5 +1,4 @@
 import homePageMovieMp4 from "../assets/homepage.mp4";
-import homePageMovieOgg from "../assets/homepage.ogg";
 import homePageMovieWebm from "../assets/homepage.webm";
 import "./HomePage.css";
 import { useNavigate } from "react-router-dom";
@@ -17,7 +16,6 @@ function HomePage() {
     <section id="WholePage">
       <video loop autoPlay muted>
         <source src={homePageMovieMp4} type="video/mp4" />
-        <source src={homePageMovieOgg} type="video/ogg" />
         <source src={homePageMovieWebm} type="video/webm" />
       </video>
     <section id="homeTitle">

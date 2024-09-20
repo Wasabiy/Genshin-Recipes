@@ -4,6 +4,7 @@
   overflow-y: scroll;
   height: 48rem;
   width: 60vw;
+  border: 0.1vh solid white;
 }
 
 #recipesBox a {
@@ -119,7 +120,11 @@
     padding: 7vh;
     align-items: center;
   }
-  
+
+  #filters a{
+    padding: 5vh;
+  }
+
   .filterList {
     display: flex;
     flex-direction: column;
@@ -128,7 +133,8 @@
     align-items: center;
     overflow-y:scroll;
     text-align: center;
-  
+    border: solid white;
+    padding: 3vh;
   }
 
 }
