@@ -1,4 +1,4 @@
-import {  useEffect, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
 import "./RecipesPage.css";
 import { DishType, KeyFood, KeyIngredient } from "../models/interface.ts";
 import RecipeCard from "../components/RecipeCard.tsx";
@@ -7,16 +7,16 @@ import {
   QueryClientProvider,
   useQuery,
 } from "@tanstack/react-query";
-import {  reformatData } from "../utils/globalFunctions.ts";
+import { getFavoriteState, reformatData } from "../utils/globalFunctions.ts";
 import { fetchFood, fetchIngredient } from "../utils/apiCalls.ts";
 
-const queryClient = new QueryClient()
-export default function RecipesPage() {
-    return (
-        <QueryClientProvider client={queryClient}>
-            <RecipeGen/>
-        </QueryClientProvider>
-    )
+const queryClient = new QueryClient();
+export default function RecipePage() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <RecipeGen />
+    </QueryClientProvider>
+  );
 }
 
 function RecipeGen() {
@@ -87,9 +87,7 @@ function RecipeGen() {
     const { checked } = event.target;
     setCheckedValue((prevCheckedValues) => {
       const newCheckedValues = checked
-        //@ts-ignore
         ? [...prevCheckedValues, name]
-        //@ts-ignore
         : prevCheckedValues.filter((value) => value !== name);
 
       sessionStorage.setItem(
@@ -102,9 +100,7 @@ function RecipeGen() {
   function filterRecipes(a: KeyFood[]) {
     console.log(checkedValue?.length);
     console.log(activeButtons);
-    if (
-      (checkedValue?.length == 0 && activeButtons == null)
-    ) {
+    if (checkedValue?.length == 0 && activeButtons == null) {
       return food.map(renderRecipes);
     } else {
       return a
@@ -145,79 +141,80 @@ function RecipeGen() {
       {foodStatus === "success" && (
         <>
           {" "}
-          <section id="title">
-            <h2 id="header">Recipes</h2>
-            <span id="itemAmount">
-              showing {filterRecipes(food || []).length} recipes
-            </span>
-          </section>
-          <section id="filterSection">
-            <span id="type">Type</span>
-            <section id="filterList">
-              <button
-                id={"atkButton"}
-                //@ts-ignore
-                onClick={(e) => handleActiveButton(e)}
-                className="filterChoices"
-                value={DishType.ATKBoostingDish}
-              >
-                Attack boosting
-              </button>
-              <button
-                id={"defButton"}
-                //@ts-ignore
-                onClick={(e) => handleActiveButton(e)}
-                className="filterChoices"
-                value={DishType.DEFBoostingDish}
-              >
-                DEF boosting
-              </button>
-              <button
-                id={"hpButton"}
-                //@ts-ignore
-                onClick={(e) => handleActiveButton(e)}
-                className="filterChoices"
-                value={DishType.RecoveryDish}
-              >
-                Recovery dish
-              </button>
-              <button
-                id={"staminButton"}
-                //@ts-ignore
-                onClick={(e) => handleActiveButton(e)}
-                className="filterChoices"
-                value={DishType.AdventurerSDish}
-              >
-                Stamina boosting
-              </button>
+          <section id="allRecipeSection">
+            <section id="filters">
+              <section id="title">
+                <h2 id="header">Recipes</h2>
+                <span id="itemAmount">
+                  showing {filterRecipes(food || []).length} recipes
+                </span>
+              </section>
+              <span id="type">Type</span>
+              <section className="filterList">
+                <button
+                  id={"atkButton"}
+                  onClick={(e) => handleActiveButton(e)}
+                  className="filterChoices"
+                  value={DishType.ATKBoostingDish}
+                >
+                  Attack boosting
+                </button>
+                <button
+                  id={"defButton"}
+                  onClick={(e) => handleActiveButton(e)}
+                  className="filterChoices"
+                  value={DishType.DEFBoostingDish}
+                >
+                  DEF boosting
+                </button>
+                <button
+                  id={"hpButton"}
+                  onClick={(e) => handleActiveButton(e)}
+                  className="filterChoices"
+                  value={DishType.RecoveryDish}
+                >
+                  Recovery dish
+                </button>
+                <button
+                  id={"staminButton"}
+                  onClick={(e) => handleActiveButton(e)}
+                  className="filterChoices"
+                  value={DishType.AdventurerSDish}
+                >
+                  Stamina boosting
+                </button>
+              </section>
+              <span>Ingredients</span>
+              <section key="displayIn" id="displayIngredientsBox">
+                <section className="filterList">
+                  <section id="ingredientScroll">
+                    {ingredients?.map((value) => {
+                      return (
+                        <label htmlFor={value.name} key={value.name}>
+                          <input
+                            id={value.name}
+                            type="checkbox"
+                            onChange={(e) =>
+                              handleCheckboxChange(e, value.name)
+                            }
+                          />
+                          {value.name}
+                          <img
+                            onLoad={(event) => onLoadChange(value.name)}
+                            src={`https://genshin.jmp.blue/materials/cooking-ingredients/${value.key}`}
+                          />
+                        </label>
+                      );
+                    })}
+                  </section>
+                </section>
+              </section>
             </section>
-          </section>
-          <span>Ingredients</span>
-          <section key="displayIn" id="displayIngredientsBox">
-            <section id="ingredientsList">
-              {ingredients?.map((value) => {
-                return (
-                  <label htmlFor={value.name} key={value.name}>
-                    <input
-                      id={value.name}
-                      type="checkbox"
-                      onChange={(e) => handleCheckboxChange(e, value.name)}
-                    />
-                    {value.name}
-                    <img
-                      //@ts-ignore
-                      onLoad={(event) => onLoadChange(value.name)}
-                      src={`https://genshin.jmp.blue/materials/cooking-ingredients/${value.key}`}
-                    />
-                  </label>
-                );
-              })}
-            </section>
-          </section>
-          <section key="displayFood" id="displayBox">
-            <section key="recipeBox" id="recipesBox">
-              {filterRecipes(food)}
-            </section>
+            <section key="displayFood" id="displayBox">
+                <section key="recipeBox" id="recipesBox">
+                  {filterRecipes(food)}
+                </section>
+              </section>
           </section>
         </>
       )}

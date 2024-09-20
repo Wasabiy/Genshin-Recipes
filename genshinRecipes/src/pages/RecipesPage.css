@@ -1,21 +1,13 @@
 #displayBox {
-  margin: auto;
-  padding: 1rem;
   text-align: center;
   width: fit-content;
   overflow-y: scroll;
-  height: 40rem;
-  margin-top: -40rem;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  height: 48rem;
+  width: 60vw;
+  border: 0.1vh solid white;
 }
 
-#displayBox div{
-  background-color: #9e7bb5;
-}
-
-#recipesBox a{
+#recipesBox a {
   text-decoration: none;
   color: white;
 }
@@ -31,85 +23,118 @@
   font-size: small;
 }
 
-#filterSection{
+#filters {
   display: flex;
-  width: 200px;
-  padding: 10px;
+  align-items: flex-start;
+  flex-direction: column;
+  width: fit-content;
+  padding: 10vh;
 }
 
-#filterList{
+.filterList {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  background-color: none;
+  height: 27vh;
+  align-items: center;
+  overflow-y:scroll;
 }
 
-#filterList button:hover{
-  background-color: #e4ba76;
-  transition: 0.1s ease-in;
+.filterList button:hover {
+  background-color: #ecb864;
 }
 
-#filterList button:active{
-  background-color: #f39c12;
-}
-
-#filterList button:focus {
-  background-color: #f39c12;
-}
-
-#ingredientFilter {
-  width: 200px; 
-  padding: 10px;
-}
-
-#ingredientsList {
-  display: flex;
-  flex-direction: column;
-  gap: 10px; 
-}
-
-#ingredientsList label {
+.filterList label {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border: 1px solid #8b6b6b; 
+  border: 1px;
   border-radius: 20px;
 }
 
-#ingredientsList label:hover{
+.filterList label:hover {
   background-color: #f39c12;
-  transition: 0.3s ease-in;
-} 
-
-#ingredientsList input[type="checkbox"] {
-  margin-right: 10px; 
 }
 
-#ingredientsList input[type="checkbox"]:checked { 
-  label{
+.filterList label:focus {
+  background-color: #f39c12;
+}
+
+.filterList input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.filterList input[type="checkbox"]:checked {
+  label {
     background-color: #f39c12;
-  } 
+    color: #f39c12;
+  }
 }
-
-#ingredientsList input[type="checkbox"]:focus { 
-  label{
+.filterList input[type="checkbox"]:focus {
+  label {
     background-color: #f39c12;
-  } 
+  }
 }
 
-#ingredientsList img {
-  width: 40px; 
+.filterList img {
+  width: 40px;
   height: auto;
-  margin-left: 10px; 
+  margin-left: 10px;
 }
 
-#displayIngredientsBox{
-  padding: 1rem;
-  text-align: center;
-  width: fit-content;
+#ingredientScroll {
   overflow-y: scroll;
-  height: 17rem;
 }
 
+#allRecipeSection {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 
+@media (max-width: 600px) {
 
+  #allRecipeSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: auto;
+  }
+  
+  #recipesBox {
+    justify-content: space-between;
+    align-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    padding: 0;
+    font-size: small;
+  }
+
+  #filters {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    width: fit-content;
+    padding: 7vh;
+    align-items: center;
+  }
+
+  #filters a{
+    padding: 5vh;
+  }
+
+  .filterList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 20vh;
+    align-items: center;
+    overflow-y:scroll;
+    text-align: center;
+    border: solid white;
+    padding: 3vh;
+  }
+
+}

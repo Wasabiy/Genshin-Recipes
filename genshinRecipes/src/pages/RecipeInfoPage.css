@@ -1,11 +1,9 @@
-#likedBtn:hover {
-    background-color: rosybrown;
-    border-radius: 10px;
+#allFavText{
+    text-align: center;
 }
 
-#notLikedBtn:hover {
-    background-color: rosybrown;
-    border-radius: 10px;
+#allFavText ul{
+    list-style: none;
+    text-align: center;
 }
-
 

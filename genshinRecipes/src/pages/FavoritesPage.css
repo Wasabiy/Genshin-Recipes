@@ -3,8 +3,7 @@
     padding: 1rem;
     text-align: center;
     width: fit-content;
-    height: 1280px;
-    overflow-y: scroll;
+ 
 }
 
 #recipesBoxFav {
@@ -19,3 +18,14 @@
     height: auto;
     font-size: small;
 }
+
+#recipesBoxFav a{
+    text-decoration: none;
+    color: white;
+}
+
+#displayText{
+    text-align: center;
+
+}
+
