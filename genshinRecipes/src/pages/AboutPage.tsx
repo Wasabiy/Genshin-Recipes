@@ -6,7 +6,7 @@ import "./AboutPage.css";
 function AboutPage() {
     return (
         <>
-        <section id="allSections">
+        <section id="allSectionsAbout">
             <h1 id="header1">About Wanmin Restaurant</h1>
             <div id="flexContainer">
             <section className="aboutBox" id="box1">

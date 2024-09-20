@@ -1,4 +1,5 @@
 #allSections {
+#allSectionsAbout {
     display: flex-column;
     margin: auto;
     align-self: center;
@@ -25,7 +26,8 @@
     width: 40vh;
     max-height: 40vh;
     overflow-y: scroll;
-    float: left
+    float: left;
+    color: black;
 }
 
 #box1 {

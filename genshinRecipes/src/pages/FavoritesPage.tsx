@@ -23,6 +23,9 @@ function FavoritesPage() {
     
     return (
         <>
+            <section id="displayText">
+                <h3>These are you favorite recipes: </h3>
+            </section>
             <section key="displayFav" id="displayBoxFav">
                 <section key="recipeBoxFav" id="recipesBoxFav">
                     {favoriteRecipes?.map((value) => {
