@@ -7,7 +7,7 @@ import {reformatData} from "../utils/globalFunctions.ts";
 import {fetchFood, fetchIngredient} from "../utils/apiCalls.ts";
 
 const queryClient = new QueryClient()
-export default function RecipePage() {
+export default function RecipesPage() {
     return (
         <QueryClientProvider client={queryClient}>
             <RecipeGen/>
