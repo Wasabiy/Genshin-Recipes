@@ -1,8 +1,8 @@
-import { render, screen, fireEvent, getByAltText } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { describe, expect, test, beforeAll, vi } from "vitest";
 import { server } from "./mock/mockServer.ts"
-import { DishType, KeyFood, Type } from "../models/interface";
+import { DishType, KeyFood } from "../models/interface";
 import RecipeCard from "../components/RecipeCard";
 import { changeFavoriteState, getFavoriteState } from "../utils/globalFunctions";
 import { MemoryRouter } from "react-router-dom";
@@ -54,7 +54,7 @@ describe("RecipeCard.tsx snapshot test", () => {
 describe('testing RecipeCard functionalities', () => {
 
         test('Check if isLiked state changes' , () => {
-        const { getByRole } = render(
+        render(
             <MemoryRouter>
                 <RecipeCard food={mockFood} src={mockSrc} />
             </MemoryRouter>
@@ -65,7 +65,7 @@ describe('testing RecipeCard functionalities', () => {
         fireEvent.click(button);
         expect(button).toHaveClass('likedButton');
         expect(changeFavoriteState).toHaveBeenCalledWith(mockFood);
-
+        //@ts-ignore
         getFavoriteState.mockReturnValueOnce(true);
         fireEvent.click(button);
         expect(button).toHaveClass('normalButton');

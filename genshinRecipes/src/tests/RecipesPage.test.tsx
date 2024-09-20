@@ -1,13 +1,9 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import '@testing-library/jest-dom';
 import { describe, expect, test, beforeAll, vi } from "vitest";
 import { server } from "./mock/mockServer.ts"
-import { KeyFood, Type } from "../models/interface.ts";
-import RecipeCard from "../components/RecipeCard.tsx";
 import RecipesPage from "../pages/RecipesPage.tsx";
-import RecipeInfoPage from "../pages/RecipeInfoPage.tsx"
-import { changeFavoriteState, getFavoriteState } from "../utils/globalFunctions.ts";
-import { MemoryRouter, BrowserRouter as Routes, Route } from "react-router-dom";
+import { MemoryRouter } from "react-router-dom";
 
 vi.mock("../utils/globalFunctions", () => ({
     changeFavoriteState: vi.fn(),
@@ -28,9 +24,4 @@ describe("RecipesPage.tsx snapshot test", () => {
         expect(asFragment()).toMatchSnapshot();
     });
 });
-
-/*describe("RecipesPage.tsx sorting function", () => {
-
-})
-*/
 

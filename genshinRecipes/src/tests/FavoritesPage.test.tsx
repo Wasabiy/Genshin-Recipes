@@ -1,10 +1,6 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render} from "@testing-library/react";
 import '@testing-library/jest-dom';
-import { describe, expect, test, beforeAll, vi } from "vitest";
-import { server } from "./mock/mockServer.ts"
-import { KeyFood, Type } from "../models/interface";
-import RecipeCard from "../components/RecipeCard";
-import { changeFavoriteState, getFavoriteState } from "../utils/globalFunctions";
+import { describe, expect, test, vi } from "vitest";
 import { MemoryRouter } from "react-router-dom";
 import FavoritesPage from "../pages/FavoritesPage.tsx";
 

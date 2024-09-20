@@ -1,4 +1,4 @@
-import { SyntheticEvent, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import "./RecipesPage.css";
 import { DishType, KeyFood, KeyIngredient } from "../models/interface.ts";
 import RecipeCard from "../components/RecipeCard.tsx";
@@ -7,7 +7,7 @@ import {
   QueryClientProvider,
   useQuery,
 } from "@tanstack/react-query";
-import { getFavoriteState, reformatData } from "../utils/globalFunctions.ts";
+import {  reformatData } from "../utils/globalFunctions.ts";
 import { fetchFood, fetchIngredient } from "../utils/apiCalls.ts";
 
 const queryClient = new QueryClient()
@@ -87,7 +87,9 @@ function RecipeGen() {
     const { checked } = event.target;
     setCheckedValue((prevCheckedValues) => {
       const newCheckedValues = checked
+        //@ts-ignore
         ? [...prevCheckedValues, name]
+        //@ts-ignore
         : prevCheckedValues.filter((value) => value !== name);
 
       sessionStorage.setItem(
@@ -154,6 +156,7 @@ function RecipeGen() {
             <section id="filterList">
               <button
                 id={"atkButton"}
+                //@ts-ignore
                 onClick={(e) => handleActiveButton(e)}
                 className="filterChoices"
                 value={DishType.ATKBoostingDish}
@@ -162,6 +165,7 @@ function RecipeGen() {
               </button>
               <button
                 id={"defButton"}
+                //@ts-ignore
                 onClick={(e) => handleActiveButton(e)}
                 className="filterChoices"
                 value={DishType.DEFBoostingDish}
@@ -170,6 +174,7 @@ function RecipeGen() {
               </button>
               <button
                 id={"hpButton"}
+                //@ts-ignore
                 onClick={(e) => handleActiveButton(e)}
                 className="filterChoices"
                 value={DishType.RecoveryDish}
@@ -178,6 +183,7 @@ function RecipeGen() {
               </button>
               <button
                 id={"staminButton"}
+                //@ts-ignore
                 onClick={(e) => handleActiveButton(e)}
                 className="filterChoices"
                 value={DishType.AdventurerSDish}
@@ -199,6 +205,7 @@ function RecipeGen() {
                     />
                     {value.name}
                     <img
+                      //@ts-ignore
                       onLoad={(event) => onLoadChange(value.name)}
                       src={`https://genshin.jmp.blue/materials/cooking-ingredients/${value.key}`}
                     />
