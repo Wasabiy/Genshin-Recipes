@@ -22,10 +22,19 @@ export default function RecipePage() {
 function RecipeGen() {
   const [food, setFood] = useState<KeyFood[]>([]);
   const [ingredients, setIngredients] = useState<KeyIngredient[] | null>();
-  const [checkedValue, setCheckedValue] = useState<String[]>();
+  const [checkedValue, setCheckedValue] = useState<String[] | null>([]);
   const [activeButtons, setActiveButtons] = useState<string | null>(
     sessionStorage.getItem("activeButton")
   );
+
+  useEffect(() => {
+    const savedFilters = JSON.parse(
+      sessionStorage.getItem("selectedIngredients") || "[]"
+    );
+    const savedType = sessionStorage.getItem("activeButton") || null;
+    setCheckedValue(savedFilters);
+    setActiveButtons(savedType);
+  }, []);
 
   const { data: foodData, status: foodStatus } = useQuery({
     queryKey: ["foodData"],
@@ -35,16 +44,6 @@ function RecipeGen() {
     queryKey: ["ingredientData"],
     queryFn: fetchIngredient,
   });
-
-  useEffect(() => {
-    const savedFilters = JSON.parse(
-      sessionStorage.getItem("selectedIngredients") || "[]"
-    );
-    const savedType = sessionStorage.getItem("activeButton") || "null";
-
-    setCheckedValue(savedFilters);
-    setActiveButtons(savedType);
-  }, []);
 
   useEffect(() => {
     if (foodStatus == "success") {
@@ -99,7 +98,11 @@ function RecipeGen() {
     });
   };
   function filterRecipes(a: KeyFood[]) {
-    if (checkedValue?.length == 0 && activeButtons == null) {
+    console.log(checkedValue?.length);
+    console.log(activeButtons);
+    if (
+      (checkedValue?.length == 0 && activeButtons == null)
+    ) {
       return food.map(renderRecipes);
     } else {
       return a
