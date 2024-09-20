@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, getByAltText } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { describe, expect, test, beforeAll, vi } from "vitest";
 import { server } from "./mock/mockServer.ts"
@@ -60,7 +60,7 @@ describe('testing RecipeCard functionalities', () => {
             </MemoryRouter>
         );
 
-        const button = getByRole('img');
+        const button = screen.getByAltText('likedButton');
 
         fireEvent.click(button);
         expect(button).toHaveClass('likedButton');
