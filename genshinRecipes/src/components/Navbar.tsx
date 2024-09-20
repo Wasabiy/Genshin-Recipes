@@ -1,14 +1,19 @@
 import React from "react";
 import "./Navbar.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation} from "react-router-dom";
 import paimon from "../assets/paimon.png"
 import primogem from "../assets/primogem.png"
 import genshinFood from "../assets/genshinFood.png"
 
 
+
 const Navbar: React.FC = () => {
+  const location = useLocation();
+
+  const onHomePage = location.pathname === '/';
+
   return (
-    <nav className="navbar">
+    <nav className={onHomePage ? "homePage" : "navbar"}>
       <div className="navbar-logo">
         <Link to="">
          The Wanmin Restaurant

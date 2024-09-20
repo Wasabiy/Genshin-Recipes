@@ -4,7 +4,8 @@ import 'react-router-dom'
 import { KeyFood } from "../models/interface.ts"
 import { Link } from 'react-router-dom';
 import {changeFavoriteState, getFavoriteState} from "../utils/globalFunctions.ts";
-
+import like from '../assets/like.png';
+import liked from '../assets/liked.png';
 
 function RecipeCard({food, src, onFavoriteChanged}: {food: KeyFood, src: string, onFavoriteChanged?:()=>void}) {
     
@@ -31,10 +32,10 @@ function RecipeCard({food, src, onFavoriteChanged}: {food: KeyFood, src: string,
             <figure key={food.key} className="cardSquares">
                 <figure className="imageButton">
                     <img className="recipeImages" src={src} alt={food.name} width="50" height="60"></img>
-                    <button key={food.key + "Btn"} onClick={(e) => { 
+                    <img src={isLiked ? liked : like} key={food.key + "Btn"} onClick={(e) => { 
                         e.preventDefault();
                         handleFavoriteChange();
-                        }} className={isLiked ? "likedButton" : "normalButton"}></button>
+                        }} className={isLiked ? "likedButton" : "normalButton"}></img>
                     </figure>
                 <p className="recipeNames">{food.name}</p> 
             </figure>

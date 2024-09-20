@@ -23,8 +23,8 @@ function FavoritesPage() {
     
     return (
         <>
-            <section key="display" id="displayBox">
-                <section key="recipeBox" id="recipesBox">
+            <section key="displayFav" id="displayBoxFav">
+                <section key="recipeBoxFav" id="recipesBoxFav">
                     {favoriteRecipes?.map((value) => {
                         return <RecipeCard food={value}
                                            src={`https://genshin.jmp.blue/consumables/food/${value.key}`} onFavoriteChanged={fetchFavoriteRecipes}/>

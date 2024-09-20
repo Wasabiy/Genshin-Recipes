@@ -3,7 +3,7 @@
 exports[`NavBar.tsx snapshot test > matches snapshot 1`] = `
 <DocumentFragment>
   <nav
-    class="navbar"
+    class="homePage"
   >
     <div
       class="navbar-logo"

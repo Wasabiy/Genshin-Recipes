@@ -3,10 +3,10 @@
 exports[`RecipesPage.tsx snapshot test > matches snapshot 1`] = `
 <DocumentFragment>
   <section
-    id="displayBox"
+    id="displayBoxFav"
   >
     <section
-      id="recipesBox"
+      id="recipesBoxFav"
     />
   </section>
 </DocumentFragment>

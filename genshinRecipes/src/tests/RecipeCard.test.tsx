@@ -2,7 +2,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import '@testing-library/jest-dom';
 import { describe, expect, test, beforeAll, vi } from "vitest";
 import { server } from "./mock/mockServer.ts"
-import { KeyFood, Type } from "../models/interface";
+import { DishType, KeyFood, Type } from "../models/interface";
 import RecipeCard from "../components/RecipeCard";
 import { changeFavoriteState, getFavoriteState } from "../utils/globalFunctions";
 import { MemoryRouter } from "react-router-dom";
@@ -26,7 +26,7 @@ const mockFood: KeyFood = {
     key: "sweet-madame",
     name: "Sweet Madame",
     rarity: 2,
-    type: Type.RecoveryDish,
+    type: DishType.RecoveryDish,
     effect: "Restores 20~24% of Max HP and an additional 900~1,500 HP to the selected character.",
     hasRecipe: true,
     description: "Honey-roasted fowl. The honey and sweet flowers come together to compliment the tender fowl meat.",
@@ -60,7 +60,7 @@ describe('testing RecipeCard functionalities', () => {
             </MemoryRouter>
         );
 
-        const button = getByRole('button');
+        const button = getByRole('img');
 
         fireEvent.click(button);
         expect(button).toHaveClass('likedButton');
