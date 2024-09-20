@@ -1,31 +1,28 @@
 #displayBoxFav {
-    margin: auto;
-    padding: 1rem;
-    text-align: center;
-    width: fit-content;
- 
+  margin: auto;
+  padding: 1rem;
+  text-align: center;
+  width: fit-content;
 }
 
 #recipesBoxFav {
-    max-width: 700px;
-    justify-content: space-between;
-    align-content: center;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    flex: 1;
-    padding: 0;
-    height: auto;
-    font-size: small;
+  max-width: 700px;
+  justify-content: space-between;
+  align-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  flex: 1;
+  padding: 0;
+  height: auto;
+  font-size: small;
 }
 
-#recipesBoxFav a{
-    text-decoration: none;
-    color: white;
+#recipesBoxFav a {
+  text-decoration: none;
+  color: white;
 }
 
-#displayText{
-    text-align: center;
-
+#displayText {
+  text-align: center;
 }
-

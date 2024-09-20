@@ -1,18 +1,14 @@
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { Food, KeyFood } from "../models/interface.ts";
-import {
-  changeFavoriteState,
-  getFavoriteState,
-  reformatData,
-} from "../utils/globalFunctions.ts";
-import rarityStar from "../assets/rarityStar.png";
-import "./RecipeInfoPage.css";
-import like from "../assets/like.png";
-import liked from "../assets/liked.png";
-import { fetchFood } from "../utils/apiCalls.ts";
-import { QueryClient, useQuery } from "@tanstack/react-query";
-import { QueryClientProvider } from "@tanstack/react-query";
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { Food, KeyFood } from '../models/interface.ts';
+import { changeFavoriteState, getFavoriteState, reformatData } from '../utils/globalFunctions.ts';
+import rarityStar from '../assets/rarityStar.png';
+import './RecipeInfoPage.css';
+import like from '../assets/like.png';
+import liked from '../assets/liked.png';
+import { fetchFood } from '../utils/apiCalls.ts';
+import { QueryClient, useQuery } from '@tanstack/react-query';
+import { QueryClientProvider } from '@tanstack/react-query';
 
 const queryClient = new QueryClient();
 export default function RecipeInfoPage() {
@@ -34,30 +30,30 @@ function RecipeInfo() {
     } else {
       setIsLiked(false);
     }
-  }, [details]);
+  }, [details, keyedFood]);
   const handleFavoriteChange = () => {
     const likedBool = getFavoriteState(keyedFood);
     setIsLiked(!likedBool);
     changeFavoriteState(keyedFood);
   };
   const { data: foodData, status: foodStatus } = useQuery({
-    queryKey: ["foodData"],
+    queryKey: ['foodData'],
     queryFn: fetchFood,
   });
   useEffect(() => {
-    if (foodStatus == "success") {
-      const data: KeyFood[] = reformatData(foodData, "KeyFood");
+    if (foodStatus == 'success') {
+      const data: KeyFood[] = reformatData(foodData, 'KeyFood');
       setDetails(data.find((x) => x.key == recipeTitle));
       getFavoriteState(keyedFood);
     }
-  }, [foodStatus]);
+  }, [foodStatus, foodData, keyedFood, recipeTitle]);
 
   return (
     <>
       <section id="allFavText">
         <h2>{details?.name}</h2>
         <h3>Press heart to like or dislike!</h3>
-        <img
+        <img alt={"Image of heart"}
           id="heartImage"
           src={isLiked ? liked : like}
           onClick={(e) => {
@@ -68,22 +64,16 @@ function RecipeInfo() {
         <h3>Details:</h3>
         <section id="detailList">
           <ul id="details">
-            <li key={"stars"}>
-              {" "}
-              Rarity:{" "}
+            <li key={'stars'}>
+              {' '}
+              Rarity:{' '}
               {[...Array(details?.rarity)].map((index) => (
-                <img
-                  key={"star" + index}
-                  src={rarityStar}
-                  alt="star"
-                  width="20"
-                  height="20"
-                />
+                <img key={'star' + index} src={rarityStar} alt="star" width="20" height="20" />
               ))}
             </li>
-            <li key={"type"}> Type: {details?.type} </li>
-            <li key={"profi"}> Proficiency: {details?.proficiency} </li>
-            <li key={"effect"}> Effect: {details?.effect} </li>
+            <li key={'type'}> Type: {details?.type} </li>
+            <li key={'profi'}> Proficiency: {details?.proficiency} </li>
+            <li key={'effect'}> Effect: {details?.effect} </li>
             <section id="ingredientBox">
               <h4>Ingredients</h4>
               <div id="ingredientList">
@@ -108,7 +98,7 @@ function RecipeInfo() {
         <section id="imgSection">
           <img
             src={`https://genshin.jmp.blue/consumables/food/${details?.key}`}
-            alt={"Image of the dish named: " + details?.name}
+            alt={'Image of the dish named: ' + details?.name}
           />
         </section>
       </section>

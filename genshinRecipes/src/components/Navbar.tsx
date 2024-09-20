@@ -1,11 +1,9 @@
-import React from "react";
-import "./Navbar.css";
-import { Link, useLocation} from "react-router-dom";
-import paimon from "../assets/paimon.png"
-import primogem from "../assets/primogem.png"
-import genshinFood from "../assets/genshinFood.png"
-
-
+import React from 'react';
+import './Navbar.css';
+import { Link, useLocation } from 'react-router-dom';
+import paimon from '../assets/paimon.png';
+import primogem from '../assets/primogem.png';
+import genshinFood from '../assets/genshinFood.png';
 
 const Navbar: React.FC = () => {
   const location = useLocation();
@@ -13,20 +11,14 @@ const Navbar: React.FC = () => {
   const onHomePage = location.pathname === '/';
 
   return (
-    <nav className={onHomePage ? "homePage" : "navbar"}>
+    <nav className={onHomePage ? 'homePage' : 'navbar'}>
       <div className="navbar-logo">
-        <Link to="">
-         The Wanmin Restaurant
-        </Link>
+        <Link to="">The Wanmin Restaurant</Link>
       </div>
       <ul className="navbar-links">
         <li>
           <Link to="/recipes">
-            <img
-              src={genshinFood}
-              alt="primo"
-              id="textLogo"
-            />
+            <img src={genshinFood} alt="primo" id="textLogo" />
             Recipes
           </Link>
         </li>

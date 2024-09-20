@@ -1,47 +1,54 @@
-import { useEffect, useState } from 'react'
-import "./RecipeCard.css";
-import 'react-router-dom'
-import { KeyFood } from "../models/interface.ts"
+import { useEffect, useState } from 'react';
+import './RecipeCard.css';
+import 'react-router-dom';
+import { KeyFood } from '../models/interface.ts';
 import { Link } from 'react-router-dom';
-import {changeFavoriteState, getFavoriteState} from "../utils/globalFunctions.ts";
+import { changeFavoriteState, getFavoriteState } from '../utils/globalFunctions.ts';
 import like from '../assets/like.png';
 import liked from '../assets/liked.png';
 
-function RecipeCard({food, src, onFavoriteChanged}: {food: KeyFood, src: string, onFavoriteChanged?:()=>void}) {
-    
-    const [isLiked, setIsLiked] = useState(Boolean);
+function RecipeCard({ food, src, onFavoriteChanged }: { food: KeyFood; src: string; onFavoriteChanged?: () => void }) {
+  const [isLiked, setIsLiked] = useState(Boolean);
 
-    useEffect(() => {
-        if(getFavoriteState(food)){
-            setIsLiked(true)
-        }else{
-            setIsLiked(false);
-        }
-    }, [food]);
+  useEffect(() => {
+    if (getFavoriteState(food)) {
+      setIsLiked(true);
+    } else {
+      setIsLiked(false);
+    }
+  }, [food]);
 
-    const handleFavoriteChange = () => {
-        const likedBool = getFavoriteState(food);
-        setIsLiked(!likedBool);
-        changeFavoriteState(food);
-        if (onFavoriteChanged) {onFavoriteChanged()}
-    };
+  const handleFavoriteChange = () => {
+    const likedBool = getFavoriteState(food);
+    setIsLiked(!likedBool);
+    changeFavoriteState(food);
+    if (onFavoriteChanged) {
+      onFavoriteChanged();
+    }
+  };
 
-    return (
-        <>
-        <Link to={`/recipes/${food.key}`} className="infoLink">
-            <figure key={food.key} className="cardSquares">
-                <figure className="imageButton">
-                    <img className="recipeImages" src={src} alt={food.name} width="50" height="60"></img>
-                    <img alt={"likedButton"} src={isLiked ? liked : like} key={food.key + "Btn"} onClick={(e) => {
-                        e.preventDefault();
-                        handleFavoriteChange();
-                        }} className={isLiked ? "likedButton" : "normalButton"}></img>
-                    </figure>
-                <p className="recipeNames">{food.name}</p> 
-            </figure>
-        </Link>
-        </>
-    )};
-
+  return (
+    <>
+      <Link to={`/recipes/${food.key}`} className="infoLink">
+        <figure key={food.key} className="cardSquares">
+          <figure className="imageButton">
+            <img className="recipeImages" src={src} alt={food.name} width="50" height="60"></img>
+            <img
+              alt={'likedButton'}
+              src={isLiked ? liked : like}
+              key={food.key + 'Btn'}
+              onClick={(e) => {
+                e.preventDefault();
+                handleFavoriteChange();
+              }}
+              className={isLiked ? 'likedButton' : 'normalButton'}
+            ></img>
+          </figure>
+          <p className="recipeNames">{food.name}</p>
+        </figure>
+      </Link>
+    </>
+  );
+}
 
 export default RecipeCard;

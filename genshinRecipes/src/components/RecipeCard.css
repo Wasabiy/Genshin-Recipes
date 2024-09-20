@@ -31,10 +31,10 @@
 }
 
 .normalButton:hover {
-    background-color:rosybrown;
+  background-color: rosybrown;
 }
 
-.likedButton:hover{
+.likedButton:hover {
   background-color: rosybrown;
   border-radius: 10px;
 }
