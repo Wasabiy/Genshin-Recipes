@@ -113,3 +113,6 @@ This file contains App.tsx within a React BrowserRouter.
 - - Globally used function unrelated to API fetch calls, includes formatting data into different interface array types, basde on inputted values.
 
 
+#### The Website:
+http://it2810-30.idi.ntnu.no/project1/
+
