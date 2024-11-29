@@ -18,15 +18,23 @@ export default function RecipePage() {
 }
 
 function RecipeGen() {
+  function getNumber({ value }:{value: string}) {
+    const num = parseInt(value);
+    console.log(num)
+    console.log( "GETNUMB")
+    return isNaN(num) ? 40 : num;
 
-  const VALUE: number =  parseInt(sessionStorage.getItem('offsetGenshin')!) || 40
+  }
+
+
   const [food, setFood] = useState<KeyFood[]>([]);
   const [ingredients, setIngredients] = useState<KeyIngredient[] | null>();
   const [checkedValue, setCheckedValue] = useState<string[] | null>([]);
   const [activeButtons, setActiveButtons] = useState<string | null>(sessionStorage.getItem('activeButton'));
   const lastItemRef = useRef<HTMLDivElement | null>(null);
-  const [offset, setOffset] = useState<number>(VALUE)
+  const [offset, setOffset] = useState<number>( getNumber({ value: sessionStorage.getItem('offsetGenshin')! }))
   const [allFood, setAllFood] = useState<KeyFood[]>([]);
+
 
   useEffect(() => {
     const savedFilters = JSON.parse(sessionStorage.getItem('selectedIngredients') || '[]');
@@ -47,11 +55,10 @@ function RecipeGen() {
   useEffect(() => {
     if (foodStatus == 'success') {
       setAllFood(reformatData(foodData, 'KeyFood'));
-      setFood(allFood.slice(0,offset));
-      let tempOff = sessionStorage.getItem('offsetGenshin') || "40";
-      setOffset(parseInt(tempOff))
-      console.log("offset" + offset)
-      console.log("SUCCESS")
+      setFood(reformatData(foodData, 'KeyFood').slice(0,offset));
+      console.log("offset: "+offset)
+      console.log("SUCCESS ON ALLFOOD TO FOOD")
+      console.log(food)
     }
   }, [foodStatus, foodData]);
 
@@ -67,16 +74,13 @@ function RecipeGen() {
     sessionStorage.removeItem('offsetGenshin')
     let string = JSON.stringify(numb)
     sessionStorage.setItem('offsetGenshin',string)
-    console.log("SESSIONSTORQAGE")
-    console.log(sessionStorage.getItem('offsetGenshin'))
-    console.log(offset)
-    console.log("SESSIONSTORQAGE")
   }
 
   function handleActiveButton(event: React.ChangeEvent<HTMLButtonElement>) {
     const check = activeButtons;
     const checkedButton = event.target.value;
     setSessionOffset(40)
+    console.log("ACTIVATE ACTIVEBUTTON")
     document.getElementById("displayBox")!.scrollTop = 0;
     if (check != null) {
       // @ts-expect-error the error is null, which is valid in this case as it resets the value
@@ -106,7 +110,10 @@ function RecipeGen() {
       sessionStorage.setItem('selectedIngredients', JSON.stringify(newCheckedValues));
       return newCheckedValues;
     });
+
     document.getElementById("displayBox")!.scrollTop = 0;
+    setSessionOffset(40)
+    console.log("ACTIVATE HANDLECHECBBOX")
   };
 
   function filterRecipes(a: KeyFood[]) {
@@ -125,6 +132,7 @@ function RecipeGen() {
         })
         .filter(Boolean);
     }
+
   }
 
   function renderRecipes(value: KeyFood) {
@@ -140,27 +148,35 @@ function RecipeGen() {
   }
 
 
+
   useEffect(() => {
     if (foodStatus === 'error' || foodStatus === 'pending') return;
-    const observerInstance = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && food.length < 237) {
-          let number: number = offset+20
-          setOffset(number); // Load more data
-          setFood(allFood.slice(0,offset));
-        }
+      const observerInstance = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && offset < 240 && food.length > 39) {
+            let number: number = offset+20
+            setSessionOffset(number)
+            setFood(allFood.slice(0,number));
+            console.log(food)
+            console.log("ACTIVATE PAGINATION")
+          }
+        });
       });
-    });
-
-    /**
-     *  CurrentRef is the current of the lastItmeRef,
-     *  and says that if it exists, observe the instance
-     * @const currentRef
-     */
-    const currentRef = lastItemRef.current;
-    if (currentRef) {
-      observerInstance.observe(currentRef);
-    }
+      const currentRef = lastItemRef.current;
+      if (currentRef) {
+        observerInstance.observe(currentRef);
+      }
+      /**
+       *  CurrentRef is the current of the lastItmeRef,
+       *  and says that if it exists, observe the instance
+       * @const currentRef
+       */
+      return () => {
+        if (currentRef) {
+          observerInstance.unobserve(currentRef);
+        }
+        observerInstance.disconnect();
+      };
   },[food])
 
 
@@ -231,7 +247,6 @@ function RecipeGen() {
                           {value.name}
                           <img alt={value.name}
                             onLoad={(event) => {
-                              console.log(event);
                               onLoadChange(value.name);
                             }}
                             src={`https://genshin.jmp.blue/materials/cooking-ingredients/${value.key}`}
@@ -247,8 +262,9 @@ function RecipeGen() {
               <section key="recipeBox" id="recipesBox">
                 {filterRecipes(food)}
               </section>
-              <div ref={lastItemRef} style={{ visibility: 'hidden', height: 'px' }} />
+              <div ref={lastItemRef} style={{ visibility: 'hidden', height: '3px' }} />
             </section>
+
           </section>
         </>
       )}
