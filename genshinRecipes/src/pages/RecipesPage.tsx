@@ -54,8 +54,11 @@ function RecipeGen() {
 
   useEffect(() => {
     if (foodStatus == 'success') {
-      setAllFood(reformatData(foodData, 'KeyFood'));
-      setFood(reformatData(foodData, 'KeyFood').slice(0,offset));
+      const list:KeyFood[] = reformatData(foodData, 'KeyFood');
+      list.pop()
+      list.pop()
+      setAllFood(list);
+      setFood(list);
       console.log("offset: "+offset)
       console.log("SUCCESS ON ALLFOOD TO FOOD")
       console.log(food)
@@ -64,7 +67,8 @@ function RecipeGen() {
 
   useEffect(() => {
     if (ingredientStatus == 'success') {
-      const ingredients: KeyIngredient[] = reformatData(ingredientData, 'KeyIngredient');
+      const ingredients: KeyIngredient[] = reformatData(ingredientData, 'KeyIngredient')
+      ingredients.pop();
       setIngredients(ingredients);
     }
   }, [ingredientStatus, ingredientData]);
@@ -116,23 +120,18 @@ function RecipeGen() {
     console.log("ACTIVATE HANDLECHECBBOX")
   };
 
-  function filterRecipes(a: KeyFood[]) {
+  function filterRecipes(a:KeyFood[]) {
     if (checkedValue?.length == 0 && activeButtons == null) {
-      return a.map(renderRecipes);
+      return a.map(renderRecipes)
     } else {
-      return a
-        ?.map((value: KeyFood) => {
-          const shouldRender = value.recipe?.some((ingredient) =>
-            //@ts-expect-error the value is never null or undefined, as the rendering will always have food mapped.
-            checkedValue.includes(ingredient.item),
-          );
+     return a?.map((value: KeyFood) => {
+          const shouldRender = value.recipe?.some((ingredient) =>checkedValue?.includes(ingredient.item));
           if (shouldRender || activeButtons?.includes(value.type)) {
             return renderRecipes(value);
           }
         })
         .filter(Boolean);
     }
-
   }
 
   function renderRecipes(value: KeyFood) {
@@ -153,10 +152,10 @@ function RecipeGen() {
     if (foodStatus === 'error' || foodStatus === 'pending') return;
       const observerInstance = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && offset < 240) {
+          if (entry.isIntersecting && offset < 250) {
             let number: number = offset+20
             setSessionOffset(number)
-            setFood(allFood.slice(0,number));
+            setFood(allFood.slice(0,offset));
             console.log(food)
             console.log("ACTIVATE PAGINATION")
           }
@@ -264,7 +263,6 @@ function RecipeGen() {
               </section>
               <div ref={lastItemRef} style={{ visibility: 'hidden', height: '3px' }} />
             </section>
-
           </section>
         </>
       )}
