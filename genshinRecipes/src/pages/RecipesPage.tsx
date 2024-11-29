@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './RecipesPage.css';
 import { DishType, KeyFood, KeyIngredient } from '../models/interface.ts';
 import RecipeCard from '../components/RecipeCard.tsx';
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
 import { reformatData } from '../utils/globalFunctions.ts';
 import { fetchFood, fetchIngredient } from '../utils/apiCalls.ts';
+import { Simulate } from 'react-dom/test-utils';
+import keyDown = Simulate.keyDown;
 
 const queryClient = new QueryClient();
 export default function RecipePage() {
@@ -16,10 +18,15 @@ export default function RecipePage() {
 }
 
 function RecipeGen() {
+
+  const VALUE: number =  parseInt(sessionStorage.getItem('offsetGenshin')!) || 40
   const [food, setFood] = useState<KeyFood[]>([]);
   const [ingredients, setIngredients] = useState<KeyIngredient[] | null>();
   const [checkedValue, setCheckedValue] = useState<string[] | null>([]);
   const [activeButtons, setActiveButtons] = useState<string | null>(sessionStorage.getItem('activeButton'));
+  const lastItemRef = useRef<HTMLDivElement | null>(null);
+  const [offset, setOffset] = useState<number>(VALUE)
+  const [allFood, setAllFood] = useState<KeyFood[]>([]);
 
   useEffect(() => {
     const savedFilters = JSON.parse(sessionStorage.getItem('selectedIngredients') || '[]');
@@ -39,8 +46,12 @@ function RecipeGen() {
 
   useEffect(() => {
     if (foodStatus == 'success') {
-      const foods: KeyFood[] = reformatData(foodData, 'KeyFood');
-      setFood(foods);
+      setAllFood(reformatData(foodData, 'KeyFood'));
+      setFood(allFood.slice(0,offset));
+      let tempOff = sessionStorage.getItem('offsetGenshin') || "40";
+      setOffset(parseInt(tempOff))
+      console.log("offset" + offset)
+      console.log("SUCCESS")
     }
   }, [foodStatus, foodData]);
 
@@ -51,9 +62,22 @@ function RecipeGen() {
     }
   }, [ingredientStatus, ingredientData]);
 
+  function setSessionOffset(numb: number){
+    setOffset(numb)
+    sessionStorage.removeItem('offsetGenshin')
+    let string = JSON.stringify(numb)
+    sessionStorage.setItem('offsetGenshin',string)
+    console.log("SESSIONSTORQAGE")
+    console.log(sessionStorage.getItem('offsetGenshin'))
+    console.log(offset)
+    console.log("SESSIONSTORQAGE")
+  }
+
   function handleActiveButton(event: React.ChangeEvent<HTMLButtonElement>) {
     const check = activeButtons;
     const checkedButton = event.target.value;
+    setSessionOffset(40)
+    document.getElementById("displayBox")!.scrollTop = 0;
     if (check != null) {
       // @ts-expect-error the error is null, which is valid in this case as it resets the value
       if (activeButtons.includes(checkedButton)) {
@@ -69,6 +93,7 @@ function RecipeGen() {
     }
   }
 
+
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>, name: string) => {
     const { checked } = event.target;
     setCheckedValue((prevCheckedValues) => {
@@ -81,12 +106,12 @@ function RecipeGen() {
       sessionStorage.setItem('selectedIngredients', JSON.stringify(newCheckedValues));
       return newCheckedValues;
     });
+    document.getElementById("displayBox")!.scrollTop = 0;
   };
+
   function filterRecipes(a: KeyFood[]) {
-    console.log(checkedValue?.length);
-    console.log(activeButtons);
     if (checkedValue?.length == 0 && activeButtons == null) {
-      return food.map(renderRecipes);
+      return a.map(renderRecipes);
     } else {
       return a
         ?.map((value: KeyFood) => {
@@ -109,10 +134,36 @@ function RecipeGen() {
   function onLoadChange(name: string) {
     const element = document.getElementById(name) as HTMLInputElement;
     ///@ts-expect-error the value is never null or undefined, as the rendering will always have food mapped.
-    if (checkedValue.includes(name)) {
+    if ( checkedValue.includes(name)) {
       return (element.checked = true);
     }
   }
+
+
+  useEffect(() => {
+    if (foodStatus === 'error' || foodStatus === 'pending') return;
+    const observerInstance = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && food.length < 237) {
+          let number: number = offset+20
+          setOffset(number); // Load more data
+          setFood(allFood.slice(0,offset));
+        }
+      });
+    });
+
+    /**
+     *  CurrentRef is the current of the lastItmeRef,
+     *  and says that if it exists, observe the instance
+     * @const currentRef
+     */
+    const currentRef = lastItemRef.current;
+    if (currentRef) {
+      observerInstance.observe(currentRef);
+    }
+  },[food])
+
+
   return (
     <>
       {foodStatus === 'error' && <h2>Error fetching data</h2>}
@@ -124,7 +175,7 @@ function RecipeGen() {
             <section id="filters">
               <section id="title">
                 <h2 id="header">Recipes</h2>
-                <span id="itemAmount">showing {filterRecipes(food || []).length} recipes</span>
+                <span id="itemAmount">showing {filterRecipes(food)?.length} out of {filterRecipes(allFood || []).length} recipes</span>
               </section>
               <span id="type">Type</span>
               <section className="filterList">
@@ -196,6 +247,7 @@ function RecipeGen() {
               <section key="recipeBox" id="recipesBox">
                 {filterRecipes(food)}
               </section>
+              <div ref={lastItemRef} style={{ visibility: 'hidden', height: 'px' }} />
             </section>
           </section>
         </>
