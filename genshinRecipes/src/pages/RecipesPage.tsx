@@ -153,7 +153,7 @@ function RecipeGen() {
     if (foodStatus === 'error' || foodStatus === 'pending') return;
       const observerInstance = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && offset < 240 && food.length > 39) {
+          if (entry.isIntersecting && offset < 240) {
             let number: number = offset+20
             setSessionOffset(number)
             setFood(allFood.slice(0,number));
