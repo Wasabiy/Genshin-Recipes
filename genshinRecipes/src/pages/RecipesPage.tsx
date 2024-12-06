@@ -49,14 +49,14 @@ function RecipeGen() {
     queryFn: fetchIngredient,
   });
 
+
   useEffect(() => {
     if (foodStatus == 'success') {
       const list:KeyFood[] = reformatData(foodData, 'KeyFood');
       list.pop()
       setAllFood(list);
       setFood(list.slice(0,offset));
-    }
-  }, [foodStatus, foodData]);
+    }},[foodStatus, foodData,offset]);
 
   useEffect(() => {
     if (ingredientStatus == 'success') {
@@ -70,7 +70,7 @@ function RecipeGen() {
   function setSessionOffset(numb: number){
     setOffset(numb)
     sessionStorage.removeItem('offsetGenshin')
-    let string = JSON.stringify(numb)
+    const string = JSON.stringify(numb)
     sessionStorage.setItem('offsetGenshin',string)
   }
 
@@ -110,7 +110,7 @@ function RecipeGen() {
 
   const handleResetCheckbox = ()=>{
     sessionStorage.setItem('selectedIngredients', JSON.stringify([]));
-    for (let name in checkedValue){
+    for (const name in checkedValue){
         onLoadChange(name)
     }
     setCheckedValue([])
@@ -159,7 +159,7 @@ function RecipeGen() {
       const observerInstance = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && offset < 250 && food.length >= 40) {
-            let number: number = offset+20
+            const number: number = offset+20
             setSessionOffset(number)
             setFood(allFood.slice(0,offset));
           }
@@ -180,7 +180,8 @@ function RecipeGen() {
         }
         observerInstance.disconnect();
       };
-  },[food])
+
+  })
 
 
   return (

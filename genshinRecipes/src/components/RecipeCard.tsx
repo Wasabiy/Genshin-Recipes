@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import '../style/components/RecipeCard.css';
 import 'react-router-dom';
 import { KeyFood } from '../models/interface.ts';
-import { Link, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import { changeFavoriteState, getFavoriteState } from '../utils/globalFunctions.ts';
 import like from '../assets/like.png';
 import liked from '../assets/liked.png';

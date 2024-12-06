@@ -3,6 +3,7 @@
 import { KeyFood } from '../models/interface.ts';
 
 // @ts-expect-error any type error
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function reformatData(data, type) {
   return Object.entries(data).map((value: [string, any]) => {
     const key = value[0];

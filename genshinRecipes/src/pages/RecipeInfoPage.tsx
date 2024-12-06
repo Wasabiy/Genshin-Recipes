@@ -1,20 +1,14 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { Food, KeyFood } from '../models/interface.ts';
+import { KeyFood } from '../models/interface.ts';
 import { changeFavoriteState, getFavoriteState } from '../utils/globalFunctions.ts';
 import rarityStar from '../assets/rarityStar.png';
 import '../style/pages/RecipeInfoPage.css';
 import like from '../assets/like.png';
 import liked from '../assets/liked.png';
-import { QueryClient } from '@tanstack/react-query';
-import { QueryClientProvider } from '@tanstack/react-query';
 
-const queryClient = new QueryClient();
 export default function RecipeInfoPage({food}:{ food: KeyFood }) {
   return (
-
       <RecipeInfo keyedFood={food} />
-
   );
 }
 function RecipeInfo({keyedFood}:{ keyedFood: KeyFood }) {
@@ -52,7 +46,7 @@ function RecipeInfo({keyedFood}:{ keyedFood: KeyFood }) {
           <ul id="keyedFood">
             <li key={'stars'}>
               Rarity:{' '}
-              {[...Array(keyedFood?.rarity)].map((value, index, array) => (
+              {[...Array(keyedFood?.rarity)].map((_value, index) => (
                 <img key={'star' + index} src={rarityStar} alt="star" width="20" height="20" />
               ))}
             </li>

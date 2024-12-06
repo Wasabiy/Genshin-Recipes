@@ -3,7 +3,6 @@ import { KeyFood } from '../models/interface.ts';
 import RecipeCard from '../components/RecipeCard.tsx';
 import '../style/pages/FavoritesPage.css';
 import {getFavorites } from '../utils/globalFunctions.ts';
-import { useQuery } from '@tanstack/react-query';
 
 function FavoritesPage() {
   const [favoriteRecipes, setFavoriteRecipes] = useState<KeyFood[] | null>();

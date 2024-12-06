@@ -1,6 +1,4 @@
-import recipeBook from '../assets/recipeCollection.png';
-import onionSoup from '../assets/fontainianOnionSoup.png';
-import recipe from '../assets/recipePaper.png';
+
 import '../style/pages/AboutPage.css';
 
 function AboutPage() {
@@ -8,7 +6,6 @@ function AboutPage() {
     <>
       <section id="allSectionsAbout">
         <h1 id="header1">About Wanmin Restaurant</h1>
-        <div id="flexContainer">
           <section className="aboutBox" id="box1">
             <p>
               Welcome to Wanmin Restaurant, Traveler! This website is a catalogue for recipes in the game Genshin
@@ -24,7 +21,7 @@ function AboutPage() {
             </p>
             <p>
               In the overview page, dishes can be filtered based on ingredients, where recipes containing one or more of
-              the selected filters will be displayed. Dishes can also be filtered based on their types.
+              the selected filters will be displayed. The filtration is additive, so it is not exclusive. Dishes can also be filtered based on their types.
             </p>
 
             <p>
@@ -33,26 +30,12 @@ function AboutPage() {
             </p>
 
             <p>Enjoy!</p>
+
+            <a href="https://genshin.dev/" target="_blank"/>
+              Genshin.Dev API
             <p> -xoxo, IT2810 group 30</p>
           </section>
 
-          <section className="aboutBox" id="box2">
-            <h3>Tools used</h3>
-            <ul>
-              <li>
-                <a href="https://genshin.dev/" target="_blank">
-                  Genshin.Dev API
-                </a>
-              </li>
-            </ul>
-          </section>
-
-          <section className="aboutBox" id="box3">
-            <img alt="Cookbook" src={recipeBook}></img>
-            <img alt="Recipe Paper" src={recipe}></img>
-            <img alt="Onion Soup" src={onionSoup}></img>
-          </section>
-        </div>
       </section>
     </>
   );
