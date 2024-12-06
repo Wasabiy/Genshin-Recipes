@@ -1,57 +1,37 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { Food, KeyFood } from '../models/interface.ts';
-import { changeFavoriteState, getFavoriteState, reformatData } from '../utils/globalFunctions.ts';
+import { KeyFood } from '../models/interface.ts';
+import { changeFavoriteState, getFavoriteState } from '../utils/globalFunctions.ts';
 import rarityStar from '../assets/rarityStar.png';
-import './RecipeInfoPage.css';
+import '../style/pages/RecipeInfoPage.css';
 import like from '../assets/like.png';
 import liked from '../assets/liked.png';
-import { fetchFood } from '../utils/apiCalls.ts';
-import { QueryClient, useQuery } from '@tanstack/react-query';
-import { QueryClientProvider } from '@tanstack/react-query';
 
-const queryClient = new QueryClient();
-export default function RecipeInfoPage() {
+export default function RecipeInfoPage({food}:{ food: KeyFood }) {
   return (
-    <QueryClientProvider client={queryClient}>
-      <RecipeInfo />
-    </QueryClientProvider>
+      <RecipeInfo keyedFood={food} />
   );
 }
-function RecipeInfo() {
-  const { recipeTitle } = useParams();
-  const [details, setDetails] = useState<KeyFood | null>();
+function RecipeInfo({keyedFood}:{ keyedFood: KeyFood }) {
+  
   const [isLiked, setIsLiked] = useState(Boolean);
-  const keyedFood = details as { key: string } & Food;
 
   useEffect(() => {
-    if (getFavoriteState(keyedFood) != null) {
+    if (getFavoriteState(keyedFood)) {
       setIsLiked(true);
     } else {
       setIsLiked(false);
     }
-  }, [details, keyedFood]);
+  }, [keyedFood]);
   const handleFavoriteChange = () => {
     const likedBool = getFavoriteState(keyedFood);
     setIsLiked(!likedBool);
     changeFavoriteState(keyedFood);
   };
-  const { data: foodData, status: foodStatus } = useQuery({
-    queryKey: ['foodData'],
-    queryFn: fetchFood,
-  });
-  useEffect(() => {
-    if (foodStatus == 'success') {
-      const data: KeyFood[] = reformatData(foodData, 'KeyFood');
-      setDetails(data.find((x) => x.key == recipeTitle));
-      getFavoriteState(keyedFood);
-    }
-  }, [foodStatus, foodData, keyedFood, recipeTitle]);
 
   return (
     <>
       <section id="allFavText">
-        <h2>{details?.name}</h2>
+        <h2>{keyedFood?.name}</h2>
         <h3>Press heart to like or dislike!</h3>
         <img alt={"Image of heart"}
           id="heartImage"
@@ -61,44 +41,43 @@ function RecipeInfo() {
             handleFavoriteChange();
           }}
         ></img>
-        <h3>Details:</h3>
+        <h3>Description:</h3>
         <section id="detailList">
-          <ul id="details">
+          <ul id="keyedFood">
             <li key={'stars'}>
-              {' '}
               Rarity:{' '}
-              {[...Array(details?.rarity)].map((index) => (
+              {[...Array(keyedFood?.rarity)].map((_value, index) => (
                 <img key={'star' + index} src={rarityStar} alt="star" width="20" height="20" />
               ))}
             </li>
-            <li key={'type'}> Type: {details?.type} </li>
-            <li key={'profi'}> Proficiency: {details?.proficiency} </li>
-            <li key={'effect'}> Effect: {details?.effect} </li>
+            <li key={'type'}> Type: {keyedFood?.type} </li>
+            <li key={'proficiency'}> Proficiency: {keyedFood?.proficiency} </li>
+            <li key={'effect'}> Effect: {keyedFood?.effect} </li>
             <section id="ingredientBox">
               <h4>Ingredients</h4>
-              <div id="ingredientList">
-                {details?.recipe == undefined ? (
+              <ul key={"IngredientUL"} id="ingredientList">
+                {keyedFood?.recipe == undefined ? (
                   <p>No Recipe</p>
                 ) : (
-                  details?.recipe &&
-                  details?.recipe.map((value) => (
-                    <p key={value.item}>
+                  keyedFood?.recipe &&
+                  keyedFood?.recipe.map((value) => (
+                    <li key={value.item}>
                       {value.item} x {value.quantity}
-                    </p>
+                    </li>
                   ))
                 )}
-              </div>
+              </ul>
             </section>
             <section id="descBox">
-              <h4 id="descHeader">Description</h4>
-              <span id="description">{details?.description}</span>
+              <h4 key={"descriptionHeader"} id="descHeader">Description</h4>
+              <span id="description">{keyedFood?.description}</span>
             </section>
           </ul>
         </section>
         <section id="imgSection">
           <img
-            src={`https://genshin.jmp.blue/consumables/food/${details?.key}`}
-            alt={'Image of the dish named: ' + details?.name}
+            src={`https://genshin.jmp.blue/consumables/food/${keyedFood?.key}`}
+            alt={'Image of the dish named: ' + keyedFood?.name}
           />
         </section>
       </section>

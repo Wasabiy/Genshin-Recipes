@@ -1,6 +1,6 @@
 import homePageMovieMp4 from '../assets/homepage.mp4';
 import homePageMovieWebm from '../assets/homepage.webm';
-import './HomePage.css';
+import '../style/pages/HomePage.css';
 import { useNavigate } from 'react-router-dom';
 
 function HomePage() {

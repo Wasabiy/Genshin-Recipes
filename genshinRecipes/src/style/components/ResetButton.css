@@ -1,0 +1,12 @@
+.filterList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 15vh;
+    align-items: center;
+    overflow-y: scroll;
+    justify-content: space-between;
+    border: 1px;
+    border-radius: 20px;
+    background-color: #f39c12;
+}

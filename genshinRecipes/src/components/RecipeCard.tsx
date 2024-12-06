@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
-import './RecipeCard.css';
+import '../style/components/RecipeCard.css';
 import 'react-router-dom';
 import { KeyFood } from '../models/interface.ts';
-import { Link } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import { changeFavoriteState, getFavoriteState } from '../utils/globalFunctions.ts';
 import like from '../assets/like.png';
 import liked from '../assets/liked.png';
 
 function RecipeCard({ food, src, onFavoriteChanged }: { food: KeyFood; src: string; onFavoriteChanged?: () => void }) {
   const [isLiked, setIsLiked] = useState(Boolean);
-
+  const navigate = useNavigate();
   useEffect(() => {
     if (getFavoriteState(food)) {
       setIsLiked(true);
@@ -18,6 +18,9 @@ function RecipeCard({ food, src, onFavoriteChanged }: { food: KeyFood; src: stri
     }
   }, [food]);
 
+  const handleReadMore = () => {
+    navigate('/recipeInfo', { state: { food: food } });
+  };
   const handleFavoriteChange = () => {
     const likedBool = getFavoriteState(food);
     setIsLiked(!likedBool);
@@ -29,10 +32,10 @@ function RecipeCard({ food, src, onFavoriteChanged }: { food: KeyFood; src: stri
 
   return (
     <>
-      <Link to={`/recipes/${food.key}`} className="infoLink">
+
         <figure key={food.key} className="cardSquares">
           <figure className="imageButton">
-            <img className="recipeImages" src={src} alt={food.name} width="50" height="60"></img>
+            <img className="recipeImages" src={src} alt={food.name} width="50" height="60" onClick={handleReadMore}></img>
             <img
               alt={'likedButton'}
               src={isLiked ? liked : like}
@@ -46,7 +49,6 @@ function RecipeCard({ food, src, onFavoriteChanged }: { food: KeyFood; src: stri
           </figure>
           <p className="recipeNames">{food.name}</p>
         </figure>
-      </Link>
     </>
   );
 }
