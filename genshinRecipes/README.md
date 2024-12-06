@@ -72,9 +72,9 @@ This file contains App.tsx within a React BrowserRouter.
 
 #### src/components
 [src/components](src/components) contains all components that was used strictly for rendering within pages.
-- [RecipeCard.tsx](src/components/RecipeCard.tsx): A component that takes in an object of type [KeyFood](src/models/interface.ts) and a string that is used as an URL to fetch images from. It has a singular state called "isLiked", which will change when the favorite button of the component is clicked. When the component itself is clicked, it will navigate to [RecipeInfoPage.tsx](src/pages/RecipeInfoPage.tsx). It has one singular [.css-file](src/components/RecipeCard.css)
+- [RecipeCard.tsx](src/components/RecipeCard.tsx): A component that takes in an object of type [KeyFood](src/models/interface.ts) and a string that is used as an URL to fetch images from. It has a singular state called "isLiked", which will change when the favorite button of the component is clicked. When the component itself is clicked, it will navigate to [RecipeInfoPage.tsx](src/pages/RecipeInfoPage.tsx). It has one singular [.css-file](src/style/components/RecipeCard.css)
 
-- [Navbar.tsx](src/components/Navbar.tsx): The navigation bar that all .tsx-files (excluding .test.tsx-files) in the project share. It is placed in [App.tsx](src/App.tsx). The navigation bar can navigate to [HomePage.tsx](src/pages/HomePage.tsx), [RecipesPage.tsx](src/pages/RecipesPage.tsx), [FavoritesPage.tsx](src/pages/FavoritesPage.tsx), and [AboutPage.tsx](src/pages/AboutPage.tsx). It has one singular [.css-file](src/components/Navbar.css) 
+- [Navbar.tsx](src/components/Navbar.tsx): The navigation bar that all .tsx-files (excluding .test.tsx-files) in the project share. It is placed in [App.tsx](src/App.tsx). The navigation bar can navigate to [HomePage.tsx](src/pages/HomePage.tsx), [RecipesPage.tsx](src/pages/RecipesPage.tsx), [FavoritesPage.tsx](src/pages/FavoritesPage.tsx), and [AboutPage.tsx](src/pages/AboutPage.tsx). It has one singular [.css-file](src/style/components/Navbar.css) 
 
 #### src/models
 [src/models](src/models/) contains one .ts-file for modelling the API response data.

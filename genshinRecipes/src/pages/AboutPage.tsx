@@ -1,7 +1,7 @@
 import recipeBook from '../assets/recipeCollection.png';
 import onionSoup from '../assets/fontainianOnionSoup.png';
 import recipe from '../assets/recipePaper.png';
-import './AboutPage.css';
+import '../style/pages/AboutPage.css';
 
 function AboutPage() {
   return (

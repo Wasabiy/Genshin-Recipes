@@ -1,5 +1,5 @@
 import React from 'react';
-import './Navbar.css';
+import '../style/components/Navbar.css';
 import { Link, useLocation } from 'react-router-dom';
 import paimon from '../assets/paimon.png';
 import primogem from '../assets/primogem.png';

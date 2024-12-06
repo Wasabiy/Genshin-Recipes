@@ -1,28 +1,33 @@
-:root {
-  font-family:
-    OCR A Std,
-    monospace;
+#root {
+  font-family: OCR A Std,
+  monospace;
   color-scheme: #795f80;
   color: rgba(255, 255, 255, 0.87);
   height: 100%;
-  margin: 0;
+  width: 100%;
+  margin: auto;
   padding: 0;
 }
-
-#root {
-  height: 100%;
-}
-
 a:hover {
   color: #765561;
 }
 
-body {
-  background-color: #9e7bb5;
+.html{
   width: 100%;
   height: 100%;
-  margin: auto;
+  margin: 0;
+  background-color: #9e7bb5;
+  padding: 0;
 }
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  background-color: #9e7bb5;
+  padding: 0;
+
+}
+
 
 h1 {
   font-size: 3.2em;
@@ -53,15 +58,19 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: none;
+  background-color: transparent;
   cursor: pointer;
   transition: border-color 0.25s;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    background-color: #9e7bb5;
+    padding: 0;
+
   }
   a:hover {
     color: #747bff;

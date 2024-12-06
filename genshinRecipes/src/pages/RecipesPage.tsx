@@ -1,12 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
-import './RecipesPage.css';
+import '../style/pages/RecipesPage.css';
 import { DishType, KeyFood, KeyIngredient } from '../models/interface.ts';
 import RecipeCard from '../components/RecipeCard.tsx';
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
 import { reformatData } from '../utils/globalFunctions.ts';
 import { fetchFood, fetchIngredient } from '../utils/apiCalls.ts';
-import { Simulate } from 'react-dom/test-utils';
-import keyDown = Simulate.keyDown;
+import ResetButton from '../components/ResetButton.tsx';
 
 const queryClient = new QueryClient();
 export default function RecipePage() {
@@ -20,8 +19,6 @@ export default function RecipePage() {
 function RecipeGen() {
   function getNumber({ value }:{value: string}) {
     const num = parseInt(value);
-    console.log(num)
-    console.log( "GETNUMB")
     return isNaN(num) ? 40 : num;
 
   }
@@ -56,12 +53,8 @@ function RecipeGen() {
     if (foodStatus == 'success') {
       const list:KeyFood[] = reformatData(foodData, 'KeyFood');
       list.pop()
-      list.pop()
       setAllFood(list);
-      setFood(list);
-      console.log("offset: "+offset)
-      console.log("SUCCESS ON ALLFOOD TO FOOD")
-      console.log(food)
+      setFood(list.slice(0,offset));
     }
   }, [foodStatus, foodData]);
 
@@ -70,6 +63,7 @@ function RecipeGen() {
       const ingredients: KeyIngredient[] = reformatData(ingredientData, 'KeyIngredient')
       ingredients.pop();
       setIngredients(ingredients);
+
     }
   }, [ingredientStatus, ingredientData]);
 
@@ -80,11 +74,10 @@ function RecipeGen() {
     sessionStorage.setItem('offsetGenshin',string)
   }
 
-  function handleActiveButton(event: React.ChangeEvent<HTMLButtonElement>) {
+  function handleActiveButton(event: React.MouseEvent<HTMLButtonElement>) {
     const check = activeButtons;
-    const checkedButton = event.target.value;
+    const checkedButton = (event.target as HTMLButtonElement).value
     setSessionOffset(40)
-    console.log("ACTIVATE ACTIVEBUTTON")
     document.getElementById("displayBox")!.scrollTop = 0;
     if (check != null) {
       // @ts-expect-error the error is null, which is valid in this case as it resets the value
@@ -103,34 +96,40 @@ function RecipeGen() {
 
 
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>, name: string) => {
-    const { checked } = event.target;
+    const {checked} = event.target
     setCheckedValue((prevCheckedValues) => {
-      const newCheckedValues = checked
-        ? //@ts-expect-error Symbol Iterator return a string
-          [...prevCheckedValues, name]
-        : //@ts-expect-error Symbol Iterator return a string
-          prevCheckedValues.filter((value) => value !== name);
-
+      const newCheckedValues = checked ? [...prevCheckedValues!, name]
+        : prevCheckedValues!.filter((value) => value !== name);
       sessionStorage.setItem('selectedIngredients', JSON.stringify(newCheckedValues));
       return newCheckedValues;
     });
 
     document.getElementById("displayBox")!.scrollTop = 0;
     setSessionOffset(40)
-    console.log("ACTIVATE HANDLECHECBBOX")
   };
 
+  const handleResetCheckbox = ()=>{
+    sessionStorage.setItem('selectedIngredients', JSON.stringify([]));
+    for (let name in checkedValue){
+        onLoadChange(name)
+    }
+    setCheckedValue([])
+    sessionStorage.setItem('activeButton', '');
+    setActiveButtons(null);
+    document.getElementById("displayBox")!.scrollTop = 0;
+  }
   function filterRecipes(a:KeyFood[]) {
     if (checkedValue?.length == 0 && activeButtons == null) {
-      return a.map(renderRecipes)
+      return a
     } else {
-     return a?.map((value: KeyFood) => {
+     return a?.filter((value: KeyFood) => {
           const shouldRender = value.recipe?.some((ingredient) =>checkedValue?.includes(ingredient.item));
           if (shouldRender || activeButtons?.includes(value.type)) {
-            return renderRecipes(value);
+            return (value);
           }
         })
         .filter(Boolean);
+
     }
   }
 
@@ -140,10 +139,17 @@ function RecipeGen() {
 
   function onLoadChange(name: string) {
     const element = document.getElementById(name) as HTMLInputElement;
-    ///@ts-expect-error the value is never null or undefined, as the rendering will always have food mapped.
-    if ( checkedValue.includes(name)) {
-      return (element.checked = true);
+    try{
+      if (checkedValue?.includes(name)) {
+        return (element.checked = true);
+      }else{
+        return (element.checked = false)
+      }
     }
+    catch{
+      return false
+    }
+
   }
 
 
@@ -152,12 +158,10 @@ function RecipeGen() {
     if (foodStatus === 'error' || foodStatus === 'pending') return;
       const observerInstance = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && offset < 250) {
+          if (entry.isIntersecting && offset < 250 && food.length >= 40) {
             let number: number = offset+20
             setSessionOffset(number)
             setFood(allFood.slice(0,offset));
-            console.log(food)
-            console.log("ACTIVATE PAGINATION")
           }
         });
       });
@@ -185,18 +189,16 @@ function RecipeGen() {
       {foodStatus === 'pending' && <h2>Fetching data...</h2>}
       {foodStatus === 'success' && (
         <>
-          {' '}
           <section id="allRecipeSection">
             <section id="filters">
               <section id="title">
                 <h2 id="header">Recipes</h2>
-                <span id="itemAmount">showing {filterRecipes(food)?.length} out of {filterRecipes(allFood || []).length} recipes</span>
+                <span id="itemAmount">showing {filterRecipes(food)?.length} out of {filterRecipes(allFood).length} recipes</span>
               </section>
-              <span id="type">Type</span>
-              <section className="filterList">
+              <span id="type">Type: {activeButtons}</span>
+              <section className="buttonList">
                 <button
                   id={'atkButton'}
-                  //@ts-expect-error the even is compatible
                   onClick={(e) => handleActiveButton(e)}
                   className="filterChoices"
                   value={DishType.ATKBoostingDish}
@@ -205,7 +207,6 @@ function RecipeGen() {
                 </button>
                 <button
                   id={'defButton'}
-                  //@ts-expect-error the even is compatible
                   onClick={(e) => handleActiveButton(e)}
                   className="filterChoices"
                   value={DishType.DEFBoostingDish}
@@ -214,7 +215,6 @@ function RecipeGen() {
                 </button>
                 <button
                   id={'hpButton'}
-                  //@ts-expect-error the even is compatible
                   onClick={(e) => handleActiveButton(e)}
                   className="filterChoices"
                   value={DishType.RecoveryDish}
@@ -223,7 +223,6 @@ function RecipeGen() {
                 </button>
                 <button
                   id={'staminButton'}
-                  //@ts-expect-error the even is compatible
                   onClick={(e) => handleActiveButton(e)}
                   className="filterChoices"
                   value={DishType.AdventurerSDish}
@@ -231,35 +230,35 @@ function RecipeGen() {
                   Stamina boosting
                 </button>
               </section>
+              <ResetButton onClick={handleResetCheckbox}></ResetButton>
               <span>Ingredients</span>
-              <section key="displayIn" id="displayIngredientsBox">
                 <section className="filterList">
-                  <section id="ingredientScroll">
+
                     {ingredients?.map((value) => {
                       return (
-                        <label htmlFor={value.name} key={value.name}>
+                        <label className={"ingredientLabel"} htmlFor={value.name} key={value.name}>
                           <input
                             id={value.name}
                             type="checkbox"
-                            onChange={(e) => handleCheckboxChange(e, value.name)}
+
+                            checked={onLoadChange(value.name)}
+                            onChange={(event) => handleCheckboxChange(event,value.name)}
                           />
                           {value.name}
                           <img alt={value.name}
-                            onLoad={(event) => {
-                              onLoadChange(value.name);
-                            }}
+                             onLoad={()=>onLoadChange(value.name)}
                             src={`https://genshin.jmp.blue/materials/cooking-ingredients/${value.key}`}
                           />
                         </label>
                       );
                     })}
                   </section>
-                </section>
-              </section>
+
+
             </section>
             <section key="displayFood" id="displayBox">
               <section key="recipeBox" id="recipesBox">
-                {filterRecipes(food)}
+                {filterRecipes(food).map(renderRecipes)}
               </section>
               <div ref={lastItemRef} style={{ visibility: 'hidden', height: '3px' }} />
             </section>

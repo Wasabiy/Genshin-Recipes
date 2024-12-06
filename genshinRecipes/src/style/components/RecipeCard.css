@@ -1,7 +1,7 @@
 .cardSquares {
   display: flex;
   flex-direction: column;
-  background-color: none;
+  background-color: transparent;
   margin: 3px;
   padding: 5px;
   width: 120px;
