@@ -7,6 +7,7 @@ import FavoritesPage from '../pages/FavoritesPage.tsx';
 vi.mock('../utils/globalFunctions', () => ({
   changeFavoriteState: vi.fn(),
   getFavoriteState: vi.fn(),
+  getFavorites: vi.fn(),
 }));
 
 const mockPush = vi.fn();
