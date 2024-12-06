@@ -14,29 +14,6 @@ export function reformatData(data, type) {
     } as typeof type;
   });
 }
-/*
-
-export function getFavoriteState(food: KeyFood) {
-  try {
-    const localIsLiked = localStorage.getItem(food.key);
-    if (localIsLiked != null) {
-      return true;
-    }
-  } catch (e) {
-    console.log(e);
-    return false;
-  }
-}
-
-export function changeFavoriteState(food: KeyFood) {
-  const localIsLiked = localStorage.getItem(food.key);
-  if (localIsLiked == null) {
-    localStorage.setItem(food.key, JSON.stringify({ ...food }));
-  } else {
-    localStorage.removeItem(food.key);
-  }
-}
-*/
 
 //All favorited dishes will be stored with this key
 const FAVORITES_KEY = 'favoriteDishes';
