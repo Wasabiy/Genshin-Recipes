@@ -140,6 +140,7 @@ overflow: hidden;
     width: fit-content;
     padding: 7vh;
     align-items: center;
+    background-color: white;
   }
 
   #filters a {
