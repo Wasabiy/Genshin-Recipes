@@ -76,7 +76,7 @@ describe('testing RecipeCard functionalities', () => {
       wrapper: ({ children }) => <MemoryRouter initialEntries={['/']}>{children}</MemoryRouter>,
     });
 
-    const cardSquares = screen.getByRole('link', { name: /sweet madame/i });
+    const cardSquares = screen.getByRole('img', { name: /sweet madame/i });
     fireEvent.click(cardSquares);
     expect(screen.getByText('Sweet Madame')).toBeTruthy();
   });
